@@ -55,12 +55,7 @@ namespace MiniMaxSum
 
             Int64 max = arr.Max();
             Int64 min = arr.Min();
-            Int64 totalSum = 0;
-
-            foreach (int number in arr)
-            {
-                totalSum += number;
-            }
+            Int64 totalSum = arr.Sum(val => (long)val);
 
             Int64 maxResult = totalSum - min;
             Int64 minResult = totalSum - max;
