@@ -24,6 +24,9 @@ namespace MiniMaxSum
 
         public static void miniMaxSum(List<int> arr)
         {
+            /// O(N^2)
+
+            /*
             Int64 max = Int64.MinValue;
             Int64 min = Int64.MaxValue;
             Int64 sum = 0;
@@ -46,8 +49,23 @@ namespace MiniMaxSum
 
                 sum = 0;
             }
+            */
 
-            Console.WriteLine("{0} {1}", min, max);
+            /// O(N) - More optimized
+
+            Int64 max = arr.Max();
+            Int64 min = arr.Min();
+            Int64 totalSum = 0;
+
+            foreach (int number in arr)
+            {
+                totalSum += number;
+            }
+
+            Int64 maxResult = totalSum - min;
+            Int64 minResult = totalSum - max;
+
+            Console.WriteLine("{0} {1}", minResult, maxResult);
         }
     }
 
