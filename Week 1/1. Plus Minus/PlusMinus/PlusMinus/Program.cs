@@ -26,26 +26,26 @@ namespace PlusMinus
         {
             int listSize = arr.Count();
 
-            float positiveRatio = 0;
-            float negativeRatio = 0;
-            float zeroRatio = 0;
+            float positiveCount = 0;
+            float negativeCount = 0;
+            float zeroCount = 0;
 
             foreach (var number in arr)
             {
 
                 if (number > 0)
-                    positiveRatio++;
+                    positiveCount++;
 
                 if (number < 0)
-                    negativeRatio++;
+                    negativeCount++;
 
                 if (number == 0)
-                    zeroRatio++;
+                    zeroCount++;
             }
 
-            Console.WriteLine((positiveRatio / listSize).ToString("F6") + "\r\n" +
-                             (negativeRatio / listSize).ToString("F6") + "\r\n" +
-                             (zeroRatio / listSize).ToString("F6"));
+            Console.WriteLine((positiveCount / listSize).ToString("F6") + "\r\n" +
+                             (negativeCount / listSize).ToString("F6") + "\r\n" +
+                             (zeroCount / listSize).ToString("F6"));
         }
     }
 
