@@ -24,7 +24,30 @@ namespace MiniMaxSum
 
         public static void miniMaxSum(List<int> arr)
         {
+            Int64 max = Int64.MinValue;
+            Int64 min = Int64.MaxValue;
+            Int64 sum = 0;
 
+            for (int i = 0; i < arr.Count; i++)
+            {
+                for (int j = 0; j < arr.Count; j++)
+                {
+                    if (i != j)
+                    {
+                        sum += arr[j];
+                    }
+                }
+
+                if (sum > max)
+                    max = sum;
+
+                if (sum < min)
+                    min = sum;
+
+                sum = 0;
+            }
+
+            Console.WriteLine("{0} {1}", min, max);
         }
     }
 
