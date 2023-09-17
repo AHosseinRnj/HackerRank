@@ -26,7 +26,27 @@ namespace BreakingTheRecords
 
         public static List<int> breakingRecords(List<int> scores)
         {
-            return new List<int>();
+            var maxScore = scores[0];
+            var minScore = scores[0];
+
+            var maxCount = 0;
+            var minCount = 0;
+
+            for (int i = 1; i < scores.Count; i++)
+            {
+                if (scores[i] > maxScore)
+                {
+                    maxScore = scores[i];
+                    maxCount++;
+                }
+                else if (scores[i] < minScore)
+                {
+                    minScore = scores[i];
+                    minCount++;
+                }
+            }
+
+            return new List<int>() { maxCount, minCount };
         }
     }
 
@@ -34,7 +54,7 @@ namespace BreakingTheRecords
     {
         static void Main(string[] args)
         {
-            TextWriter textWriter = new StreamWriter(@System.Environment.GetEnvironmentVariable("OUTPUT_PATH"), true);
+            TextWriter textWriter = new StreamWriter("C:\\Users\\AmirHossein\\Desktop\\test\\text.txt", true);
 
             int n = Convert.ToInt32(Console.ReadLine().Trim());
 
@@ -46,6 +66,8 @@ namespace BreakingTheRecords
 
             textWriter.Flush();
             textWriter.Close();
+
+            Console.ReadLine();
         }
     }
 }
