@@ -30,7 +30,9 @@ namespace TimeConversion
 
             /*
             DateTime dateTime;
-            DateTime.TryParse(s, out dateTime);
+
+            if (!DateTime.TryParse(s, out dateTime))
+                throw new ArgumentException("Invalid DateTime Format");
 
             return dateTime.TimeOfDay.ToString();
             */
@@ -44,9 +46,9 @@ namespace TimeConversion
             var second = Convert.ToInt32(input[2].Substring(0, 2));
             var meridiem = input[2].Substring(2, 2);
 
-            if (meridiem == "PM" && hour != 12)
+            if (meridiem.Equals("PM", StringComparison.OrdinalIgnoreCase) && hour != 12)
                 hour += 12;
-            else if (meridiem == "AM" && hour == 12)
+            else if (meridiem.Equals("AM", StringComparison.OrdinalIgnoreCase) && hour == 12)
                 hour = 0;
 
             var result = string.Format("{0:D2}:{1:D2}:{2:D2}", hour, minute, second);
