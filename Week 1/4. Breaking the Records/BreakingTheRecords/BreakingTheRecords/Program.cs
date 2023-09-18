@@ -32,6 +32,8 @@ namespace BreakingTheRecords
             var maxCount = 0;
             var minCount = 0;
 
+            /// With for Loop
+
             for (int i = 1; i < scores.Count; i++)
             {
                 if (scores[i] > maxScore)
@@ -45,6 +47,30 @@ namespace BreakingTheRecords
                     minCount++;
                 }
             }
+
+            /// With LINQ
+
+            /*
+            maxCount = scores.Skip(1).Distinct().Count(s =>
+            {
+                if (s > maxScore)
+                {
+                    maxScore = s;
+                    return true;
+                }
+                return false;
+            });
+
+            minCount = scores.Skip(1).Distinct().Count(s =>
+            {
+                if (s > minScore)
+                {
+                    minScore = s;
+                    return true;
+                }
+                return false;
+            });
+            */
 
             var result = new List<int>() { maxCount, minCount };
             return result;
