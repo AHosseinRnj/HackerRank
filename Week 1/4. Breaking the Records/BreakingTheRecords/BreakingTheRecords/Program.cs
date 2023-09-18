@@ -46,7 +46,8 @@ namespace BreakingTheRecords
                 }
             }
 
-            return new List<int>() { maxCount, minCount };
+            var result = new List<int>() { maxCount, minCount };
+            return result;
         }
     }
 
