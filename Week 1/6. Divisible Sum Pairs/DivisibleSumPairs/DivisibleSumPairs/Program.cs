@@ -29,7 +29,45 @@ namespace DivisibleSumPairs
 
         public static int divisibleSumPairs(int n, int k, List<int> ar)
         {
-            return 0;
+            /// O(N^2) 
+
+            /*
+
+            var counter = 0; 
+
+            for (int i = 0; i < ar.Count; i++)
+            {
+                for (int j = i + 1; j < ar.Count; j++)
+                {
+                    if ((ar[i] + ar[j]) % k == 0)
+                        counter++;
+                }
+            }
+            */
+
+            /// O(N)
+
+            var counter = 0;
+            var remainderCount = new Dictionary<int, int>();
+            var remainder = 0;
+            var complementRemainder = 0;
+
+            foreach (var number in ar)
+            {
+                remainder = number % k;
+                complementRemainder = (k - remainder) % k;
+
+                if (remainderCount.ContainsKey(complementRemainder))
+                    counter += remainderCount[complementRemainder];
+
+                if (remainderCount.ContainsKey(remainder))
+                    remainderCount[remainder]++;
+                else
+                    remainderCount[remainder] = 1;
+            }
+
+            Console.WriteLine(counter);
+            return counter;
         }
     }
 
@@ -53,6 +91,8 @@ namespace DivisibleSumPairs
 
             textWriter.Flush();
             textWriter.Close();
+
+            Console.ReadLine();
         }
     }
 }
