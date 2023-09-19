@@ -39,6 +39,9 @@ namespace CamelCase4
 
             var inputArray = input.Split(';');
 
+            if (inputArray.Length < 3)
+                throw new ArgumentException("Wrong format for input.");
+
             var firstOperator = inputArray[0];
             var secondOperator = inputArray[1];
             var word = inputArray[2];
