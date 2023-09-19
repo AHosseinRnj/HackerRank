@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace CamelCase4
@@ -56,6 +57,9 @@ namespace CamelCase4
 
         public static void SplitWord(string word)
         {
+            /// Old Way
+
+            /*
             var result = new StringBuilder();
 
             for (int i = 0; i < word.Length; i++)
@@ -68,10 +72,25 @@ namespace CamelCase4
             }
 
             Console.WriteLine(result.ToString());
+            */
+
+            /// New Way
+
+            var CapitalLetters = word.Where(c => char.IsUpper(c));
+
+            foreach (var capitalLetter in CapitalLetters)
+                word = word.Replace(capitalLetter.ToString(), " " + char.ToLower(capitalLetter));
+
+            word = word.TrimStart().TrimEnd('(', ')');
+
+            Console.WriteLine(word);
         }
 
         public static void CombineWord(string word, string secondOperator)
         {
+            /// Old Way
+
+            /*
             var result = new StringBuilder();
 
             for (int i = 0; i < word.Length; i++)
@@ -92,6 +111,26 @@ namespace CamelCase4
                 throw new ArgumentException("Unknown Second operator.");
 
             Console.WriteLine(result.ToString());
+            */
+
+            /// New Way
+
+            var result = new StringBuilder();
+            var listOfWords = word.Split(' ').ToList();
+
+            if (!secondOperator.Equals("C", StringComparison.OrdinalIgnoreCase))
+            {
+                result.Append(listOfWords[0]);
+                listOfWords = listOfWords.Skip(1).ToList();
+            }
+
+            foreach (var currWord in listOfWords)
+                result.Append(char.ToUpper(currWord[0]) + currWord.Substring(1));
+
+            if (secondOperator.Equals("M", StringComparison.OrdinalIgnoreCase))
+                result.Append("()");
+
+            Console.WriteLine(result);
         }
     }
 }
