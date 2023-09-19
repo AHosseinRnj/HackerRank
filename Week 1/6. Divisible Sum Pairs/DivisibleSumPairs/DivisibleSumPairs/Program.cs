@@ -66,7 +66,6 @@ namespace DivisibleSumPairs
                     remainderCount[remainder] = 1;
             }
 
-            Console.WriteLine(counter);
             return counter;
         }
     }
