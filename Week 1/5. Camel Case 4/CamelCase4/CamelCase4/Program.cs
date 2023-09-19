@@ -74,10 +74,7 @@ namespace CamelCase4
             for (int i = 0; i < word.Length; i++)
             {
                 if (word[i] == ' ')
-                {
-                    result.Append(char.ToUpper(word[i + 1]));
-                    i++;
-                }
+                    result.Append(char.ToUpper(word[++i]));
                 else
                     result.Append(word[i]);
             }
