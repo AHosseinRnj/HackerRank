@@ -55,7 +55,7 @@ namespace CamelCase4
                 throw new ArgumentException("Unknown First operator.");
         }
 
-        public static void SplitWord(string word)
+        private static void SplitWord(string word)
         {
             /// Old Way
 
@@ -86,7 +86,7 @@ namespace CamelCase4
             Console.WriteLine(word);
         }
 
-        public static void CombineWord(string word, string secondOperator)
+        private static void CombineWord(string word, string secondOperator)
         {
             /// Old Way
 
