@@ -29,7 +29,47 @@ namespace SparseArrays
 
         public static List<int> matchingStrings(List<string> strings, List<string> queries)
         {
-            return new List<int>();
+            /// O(N^2)
+
+            /*
+            var count = 0;
+            var result = new List<int>();
+
+            foreach (var query in queries)
+            {
+                count = 0;
+                foreach (var str in strings)
+                {
+                    if(query == str)
+                        count++;
+                }
+
+                result.Add(count);
+            }   
+            */
+
+            /// O(N) || (N + N)
+
+            var result = new List<int>();
+            var countDictionary = new Dictionary<string, int>();
+
+            foreach (var str in strings)
+            {
+                if (countDictionary.ContainsKey(str))
+                    countDictionary[str]++;
+                else
+                    countDictionary[str] = 1;
+            }
+
+            foreach (var query in queries)
+            {
+                if (countDictionary.ContainsKey(query))
+                    result.Add(countDictionary[query]);
+                else
+                    result.Add(0);
+            }
+
+            return result;
         }
     }
 
@@ -65,6 +105,8 @@ namespace SparseArrays
 
             textWriter.Flush();
             textWriter.Close();
+
+            Console.ReadLine();
         }
     }
 }
