@@ -29,6 +29,8 @@ namespace DivisibleSumPairs
 
         public static int divisibleSumPairs(int n, int k, List<int> ar)
         {
+            ValidateParameters(n, k, ar);
+
             /// O(N^2) 
 
             /*
@@ -67,6 +69,28 @@ namespace DivisibleSumPairs
             }
 
             return counter;
+        }
+
+        private static void ValidateParameters(int n, int k, List<int> ar)
+        {
+            /// 2 <= n <= 100
+            if (n < 2 || n > 100)
+                throw new ArgumentException("First parameter should be between 2 and 100", nameof(n));
+
+            /// Check the array lenght based on 'n'
+            if (ar.Count != n)
+                throw new ArgumentException("Array size does not match the value of n");
+
+            /// 1 <= k <= 100
+            if (k < 2 || k > 100)
+                throw new ArgumentException("Second parameter should be between 2 and 100", nameof(k));
+
+            /// 1 <= ar[i] <= 100
+            foreach (var value in ar)
+            {
+                if (value < 1 || value > 100)
+                    throw new ArgumentException("Array elements should be between 1 and 100");
+            }
         }
     }
 
