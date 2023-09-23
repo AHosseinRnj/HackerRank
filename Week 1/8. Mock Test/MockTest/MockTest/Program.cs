@@ -18,7 +18,9 @@ namespace MockTest
 
         public static int findMedian(List<int> arr)
         {
-            return 0;
+            arr.Sort();
+
+            return arr[arr.Count / 2];
         }
 
     }
@@ -39,6 +41,8 @@ namespace MockTest
 
             textWriter.Flush();
             textWriter.Close();
+
+            Console.ReadLine();
         }
     }
 }
