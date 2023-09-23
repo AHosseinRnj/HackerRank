@@ -29,6 +29,8 @@ namespace SparseArrays
 
         public static List<int> matchingStrings(List<string> strings, List<string> queries)
         {
+            ValidateParameters(strings, queries);
+
             /// O(N^2)
 
             /*
@@ -70,6 +72,22 @@ namespace SparseArrays
             }
 
             return result;
+        }
+
+        private static void ValidateParameters(List<string> strings, List<string> queries)
+        {
+            /// 1 <= strings[i], queries[i] <= 20
+            foreach (var str in strings)
+            {
+                if (str.Length < 1 || str.Length > 20)
+                    throw new ArgumentException("Each string length should be between 1 and 20");
+            }
+
+            foreach (var query in queries)
+            {
+                if (query.Length < 1 || query.Length > 20)
+                    throw new ArgumentException("Each query length should be between 1 and 20");
+            }
         }
     }
 
