@@ -18,11 +18,30 @@ namespace MockTest
 
         public static int findMedian(List<int> arr)
         {
+            Validate(arr);
+
             arr.Sort();
 
             return arr[arr.Count / 2];
         }
 
+        private static void Validate(List<int> arr)
+        {
+            /// 1 <= n <= 1000001
+            if (arr.Count < 1 || arr.Count > 1000001)
+                throw new ArgumentException("Count of array elements must be between 1 and 1000001");
+
+            /// n is odd
+            if (arr.Count % 2 == 0)
+                throw new ArgumentException("Count of array elemnts must be odd");
+
+            /// -10000 <= arr[i] <= 10000
+            foreach (var number in arr)
+            {
+                if (number < -10000 || number > 10000)
+                    throw new ArgumentException("Each array element must be between -10000 and 10000");
+            }
+        }
     }
 
     internal class Program
