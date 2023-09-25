@@ -76,6 +76,14 @@ namespace SparseArrays
 
         private static void ValidateParameters(List<string> strings, List<string> queries)
         {
+            /// 1 <= n <= 1000, where n is strings.Count
+            if (strings.Count < 1 || strings.Count > 1000)
+                throw new ArgumentException("Count of arrays elements must be between 1 and 1000");
+
+            /// 1 <= q <= 1000, where q is queries.Count
+            if (queries.Count < 1 || queries.Count > 1000)
+                throw new ArgumentException("Count of arrays elements must be between 1 and 1000");
+
             /// 1 <= strings[i], queries[i] <= 20
             foreach (var str in strings)
             {
