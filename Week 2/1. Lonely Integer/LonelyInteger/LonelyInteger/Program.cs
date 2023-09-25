@@ -27,7 +27,39 @@ namespace LonelyInteger
 
         public static int lonelyinteger(List<int> a)
         {
-            return 0;
+            Validate(a);
+
+            var result = 0;
+            var hashSet = new HashSet<int>();
+
+            foreach (var number in a)
+            {
+                if (hashSet.Contains(number))
+                    hashSet.Remove(number);
+                else
+                    hashSet.Add(number);
+            }
+
+            result = hashSet.SingleOrDefault();
+            return result;
+        }
+
+        private static void Validate(List<int> a)
+        {
+            /// 1 <= n < 100
+            if (a.Count < 1 || a.Count >= 100)
+                throw new ArgumentException("Count of array elements must be between 1 and 100");
+
+            /// n is odd
+            if (a.Count % 2 == 0)
+                throw new ArgumentException("Count of array elements must be odd");
+
+            /// 0 <= a[i] <= 100, where 0 <= i < n
+            foreach (var number in a)
+            {
+                if (number < 0 || number > 100)
+                    throw new ArgumentException("Each array element must be between 0 and 100");
+            }
         }
     }
 
@@ -47,6 +79,8 @@ namespace LonelyInteger
 
             textWriter.Flush();
             textWriter.Close();
+
+            Console.ReadLine();
         }
     }
 }
