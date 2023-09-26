@@ -27,7 +27,46 @@ namespace GradingStudents
 
         public static List<int> gradingStudents(List<int> grades)
         {
-            return new List<int>();
+            Validate(grades);
+
+            var result = new List<int>();
+
+            foreach (var grade in grades)
+            {
+                if (grade >= 38)
+                    result.Add(CalculateNewGrade(grade));
+                else
+                    result.Add(grade);
+            }
+
+            return result;
+        }
+
+        private static int CalculateNewGrade(int grade)
+        {
+            var nextMultipleOf5 = Math.Round((double)(grade / 5)) * 5;
+
+            if (nextMultipleOf5 < grade)
+                nextMultipleOf5 += 5;
+
+            if (nextMultipleOf5 - grade < 3)
+                return (int)nextMultipleOf5;
+            else
+                return grade;
+        }
+
+        private static void Validate(List<int> grades)
+        {
+            /// 1 <= n <= 60
+            if (grades.Count < 1 || grades.Count > 60)
+                throw new ArgumentException("Count of array elements must be between 1 and 60");
+
+            /// 0 <= grades[i] <= 100
+            foreach (var grade in grades)
+            {
+                if (grade < 0 || grade > 100)
+                    throw new ArgumentException("Each array element must be between 0 and 100");
+            }
         }
     }
 
