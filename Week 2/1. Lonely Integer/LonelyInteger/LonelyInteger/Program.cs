@@ -55,11 +55,16 @@ namespace LonelyInteger
                 throw new ArgumentException("Count of array elements must be odd");
 
             /// 0 <= a[i] <= 100, where 0 <= i < n
+            if (a.Any(num => num < 0 || num > 100))
+                throw new ArgumentException("Each array element must be between 0 and 100");
+
+            /*
             foreach (var number in a)
             {
                 if (number < 0 || number > 100)
                     throw new ArgumentException("Each array element must be between 0 and 100");
             }
+            */
         }
     }
 
