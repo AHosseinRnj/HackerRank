@@ -62,11 +62,16 @@ namespace GradingStudents
                 throw new ArgumentException("Count of array elements must be between 1 and 60");
 
             /// 0 <= grades[i] <= 100
+            if (grades.Any(grade => grade < 0 || grade > 100))
+                throw new ArgumentException("Each array element must be between 0 and 100");
+
+            /*
             foreach (var grade in grades)
             {
                 if (grade < 0 || grade > 100)
                     throw new ArgumentException("Each array element must be between 0 and 100");
             }
+            */
         }
     }
 
