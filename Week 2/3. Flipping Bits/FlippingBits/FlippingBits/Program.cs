@@ -27,7 +27,18 @@ namespace FlippingBits
 
         public static long flippingBits(long n)
         {
-            return 0;
+            Validate(n);
+
+            var unsignedInt = Convert.ToUInt32(n);
+            var result = ~unsignedInt;
+
+            return result;
+        }
+
+        private static void Validate(long n)
+        {
+            if (n < 0 || n > Math.Pow(2, 32))
+                throw new ArgumentException("input should be between 0 and 2^32", nameof(n));
         }
     }
 
@@ -50,6 +61,8 @@ namespace FlippingBits
 
             textWriter.Flush();
             textWriter.Close();
+
+            Console.ReadLine();
         }
     }
 }
