@@ -34,7 +34,10 @@ namespace GradingStudents
             foreach (var grade in grades)
             {
                 if (grade >= 38)
-                    result.Add(CalculateNewGrade(grade));
+                {
+                    var newGrade = CalculateNewGrade(grade);
+                    result.Add(newGrade);
+                }
                 else
                     result.Add(grade);
             }
