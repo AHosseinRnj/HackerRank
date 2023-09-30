@@ -29,8 +29,7 @@ namespace FlippingBits
         {
             Validate(n);
 
-            var unsignedInt = Convert.ToUInt32(n);
-            var result = ~unsignedInt;
+            var result = uint.MaxValue - n;
 
             return result;
         }
