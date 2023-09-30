@@ -27,7 +27,26 @@ namespace DiagonalDifference
 
         public static int diagonalDifference(List<List<int>> arr)
         {
-            return 0;
+            var ltrDiagonal = 0;
+            var rtlDiagonal = 0;
+            var index = 0;
+
+            // Calculate left-to-right diagonal
+            foreach (var row in arr)
+            {
+                ltrDiagonal += row[index];
+                index++;
+            }
+
+            // Calculate right-to-left diagonal
+            foreach (var row in arr)
+            {
+                rtlDiagonal += row[index - 1];
+                index--;
+            }
+
+            var result = Math.Abs(ltrDiagonal - rtlDiagonal);
+            return result;
         }
     }
 
@@ -52,6 +71,8 @@ namespace DiagonalDifference
 
             textWriter.Flush();
             textWriter.Close();
+
+            Console.ReadLine();
         }
     }
 }
