@@ -31,18 +31,12 @@ namespace DiagonalDifference
             var rtlDiagonal = 0;
             var index = 0;
 
-            // Calculate left-to-right diagonal
             foreach (var row in arr)
             {
                 ltrDiagonal += row[index];
-                index++;
-            }
+                rtlDiagonal += row[arr.Count - 1 - index];
 
-            // Calculate right-to-left diagonal
-            foreach (var row in arr)
-            {
-                rtlDiagonal += row[index - 1];
-                index--;
+                index++;
             }
 
             var result = Math.Abs(ltrDiagonal - rtlDiagonal);
