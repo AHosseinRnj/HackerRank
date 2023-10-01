@@ -25,22 +25,39 @@ namespace DiagonalDifference
          * The function accepts 2D_INTEGER_ARRAY arr as parameter.
          */
 
-        public static int diagonalDifference(List<List<int>> arr)
+        public static int diagonalDifference(List<List<int>> matrixArray)
         {
+            Validate(matrixArray);
+
+            var index = 0;
             var ltrDiagonal = 0;
             var rtlDiagonal = 0;
-            var index = 0;
+            var lastIndex = matrixArray.Count - 1;
 
-            foreach (var row in arr)
+            foreach (var row in matrixArray)
             {
                 ltrDiagonal += row[index];
-                rtlDiagonal += row[arr.Count - 1 - index];
+                rtlDiagonal += row[lastIndex - index];
 
                 index++;
             }
 
             var result = Math.Abs(ltrDiagonal - rtlDiagonal);
             return result;
+        }
+
+        private static void Validate(List<List<int>> matrixArray)
+        {
+            if (matrixArray.Any(row => row.Any(val => val < -100 || val > 100)))
+                throw new ArgumentException("Each matrix elements must be between -100 and 100");
+
+            var numOfRows = matrixArray.Count;
+            foreach (var row in matrixArray)
+            {
+                var numOfCol = row.Count;
+                if (numOfRows != numOfCol)
+                    throw new ArgumentException("Input matrix should be Square");
+            }
         }
     }
 
