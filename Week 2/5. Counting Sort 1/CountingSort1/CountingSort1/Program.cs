@@ -25,11 +25,42 @@ namespace CountingSort1
          * The function accepts INTEGER_ARRAY arr as parameter.
          */
 
+        /* Full Implementation 
+         
+            var result = new List<int>();
+            
+            for (int i = 0; i < freqCount.Length; i++)
+            {
+                var repeatCount = freqCount[i];
+                for (int j = 0; j < repeatCount; j++)
+                {
+                    result.Add(i);
+                }
+            }
+
+        */
+
+        const int MaxValue = 100;
         public static List<int> countingSort(List<int> arr)
         {
-            return new List<int>();
+            Validate(arr);
+
+            var freqCount = new int[MaxValue];
+
+            foreach (var number in arr)
+                freqCount[number]++;
+
+            return freqCount.ToList();
         }
 
+        private static void Validate(List<int> arr)
+        {
+            if (arr.Count < 100 || arr.Count > (int)Math.Pow(10, 6))
+                throw new ArgumentException("Array count should be between 100 and 10^6");
+
+            if (arr.Any(val => val < 0 || val > 100))
+                throw new ArgumentException("Each array element should be between 0 and 100");
+        }
     }
 
     internal class Program
@@ -48,6 +79,8 @@ namespace CountingSort1
 
             textWriter.Flush();
             textWriter.Close();
+
+            Console.ReadLine();
         }
     }
 }
