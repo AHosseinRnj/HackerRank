@@ -52,12 +52,8 @@ namespace DiagonalDifference
                 throw new ArgumentException("Each matrix elements must be between -100 and 100");
 
             var numOfRows = matrixArray.Count;
-            foreach (var row in matrixArray)
-            {
-                var numOfCol = row.Count;
-                if (numOfRows != numOfCol)
-                    throw new ArgumentException("Input matrix should be Square");
-            }
+            if (matrixArray.Any(row => row.Count != numOfRows))
+                throw new ArgumentException("Input matrix should be Square");
         }
     }
 
