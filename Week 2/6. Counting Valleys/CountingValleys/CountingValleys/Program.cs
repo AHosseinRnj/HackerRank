@@ -29,7 +29,37 @@ namespace CountingValleys
 
         public static int countingValleys(int steps, string path)
         {
-            return 0;
+            Validate(steps, path);
+
+            var seaLevel = 0;
+            var valleyCount = 0;
+
+            foreach (var stepChar in path)
+            {
+                if (char.ToUpper(stepChar) == 'U' && seaLevel == -1)
+                {
+                    seaLevel++;
+                    valleyCount++;
+                }
+                else if (char.ToUpper(stepChar) == 'D')
+                    seaLevel--;
+                else
+                    seaLevel++;
+            }
+
+            return valleyCount;
+        }
+
+        private static void Validate(int steps, string path)
+        {
+            if (steps < 2 || steps > Math.Pow(10, 6))
+                throw new ArgumentException("steps should be between 2 and 10^6", nameof(steps));
+
+            if (steps != path.Length)
+                throw new ArgumentException("steps and length of the path should be the same");
+
+            if (path.Any(character => char.ToUpper(character) != 'U' && char.ToUpper(character) != 'D'))
+                throw new ArgumentException("Only valid characters are 'U' and 'D'", nameof(path));
         }
     }
 
@@ -49,6 +79,8 @@ namespace CountingValleys
 
             textWriter.Flush();
             textWriter.Close();
+
+            Console.ReadLine();
         }
     }
 }
