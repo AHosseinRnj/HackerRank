@@ -29,6 +29,7 @@ namespace Pangrams
         {
             Validate(input);
 
+            /*
             input = input.ToLower();
             const int totalEnglishAlphabet = 26;
             var alphabetSet = new HashSet<char>();
@@ -40,6 +41,17 @@ namespace Pangrams
             }
 
             if (alphabetSet.Count == totalEnglishAlphabet)
+                return "pangram";
+            else
+                return "not pangram";
+            */
+
+            /// New Way
+
+            const int totalEnglishAlphabet = 26;
+            var finalAlphabets = input.ToLower().Where(chr => !char.IsWhiteSpace(chr)).Distinct().ToArray();
+
+            if (finalAlphabets.Length == totalEnglishAlphabet)
                 return "pangram";
             else
                 return "not pangram";
