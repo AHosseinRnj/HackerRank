@@ -29,6 +29,7 @@ namespace CountingValleys
 
         public static int countingValleys(int steps, string path)
         {
+            path = path.ToUpper();
             Validate(steps, path);
 
             var seaLevel = 0;
@@ -36,15 +37,15 @@ namespace CountingValleys
 
             foreach (var stepChar in path)
             {
-                if (char.ToUpper(stepChar) == 'U' && seaLevel == -1)
+                if (stepChar == 'U')
                 {
+                    if (seaLevel == -1)
+                        valleyCount++;
+
                     seaLevel++;
-                    valleyCount++;
                 }
-                else if (char.ToUpper(stepChar) == 'D')
-                    seaLevel--;
                 else
-                    seaLevel++;
+                    seaLevel--;
             }
 
             return valleyCount;
@@ -58,7 +59,7 @@ namespace CountingValleys
             if (steps != path.Length)
                 throw new ArgumentException("steps and length of the path should be the same");
 
-            if (path.Any(character => char.ToUpper(character) != 'U' && char.ToUpper(character) != 'D'))
+            if (path.Any(character => character != 'U' && character != 'D'))
                 throw new ArgumentException("Only valid characters are 'U' and 'D'", nameof(path));
         }
     }
