@@ -49,7 +49,7 @@ namespace Pangrams
             /// New Way
 
             const int totalEnglishAlphabet = 26;
-            var finalAlphabets = input.ToLower().Where(chr => !char.IsWhiteSpace(chr)).Distinct().ToArray();
+            var finalAlphabets = input.ToLower().Where(chr => char.IsLetter(chr)).Distinct().ToArray();
 
             if (finalAlphabets.Length == totalEnglishAlphabet)
                 return "pangram";
