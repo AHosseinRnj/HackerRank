@@ -29,25 +29,6 @@ namespace Pangrams
         {
             Validate(input);
 
-            /*
-            input = input.ToLower();
-            const int totalEnglishAlphabet = 26;
-            var alphabetSet = new HashSet<char>();
-
-            foreach (var character in input)
-            {
-                if (!alphabetSet.Contains(character) && char.IsLetter(character))
-                    alphabetSet.Add(character);
-            }
-
-            if (alphabetSet.Count == totalEnglishAlphabet)
-                return "pangram";
-            else
-                return "not pangram";
-            */
-
-            /// New Way
-
             const int totalEnglishAlphabet = 26;
             var finalAlphabets = input.ToLower().Where(chr => char.IsLetter(chr)).Distinct().ToArray();
 
@@ -62,7 +43,7 @@ namespace Pangrams
             if (input.Length < 0 || input.Length > Math.Pow(10, 3))
                 throw new ArgumentException("Length of input string should be between 0 and 10^3", nameof(input));
 
-            if (input.Any(chr => !char.IsLetter(chr) && chr != ' '))
+            if (input.Any(chr => !char.IsLetter(chr) && !char.IsWhiteSpace(chr)))
                 throw new ArgumentException("Each character should be {a-z, A-Z, Space}");
         }
     }
