@@ -33,24 +33,16 @@ namespace MarsExploration
 
             for (int i = 0; i < input.Length; i += 3)
             {
-                var currentMessage = input.Substring(i, 3);
-                result += CompareWithSOS(currentMessage);
-            }
-            Console.WriteLine(result);
-            return result;
-        }
+                if (input[i] != 'S')
+                    result++;
 
-        private static int CompareWithSOS(string message)
-        {
-            var result = 0;
-            var sosString = "SOS";
+                if (input[i + 1] != 'O')
+                    result++;
 
-            for (int i = 0; i < message.Length; i++)
-            {
-                if (message[i] != sosString[i])
+                if (input[i + 2] != 'S')
                     result++;
             }
-
+            
             return result;
         }
 
