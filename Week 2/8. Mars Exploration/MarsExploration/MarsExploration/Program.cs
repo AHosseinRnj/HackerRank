@@ -27,7 +27,43 @@ namespace MarsExploration
 
         public static int marsExploration(string input)
         {
-            return 0;
+            Validate(input);
+
+            var result = 0;
+
+            for (int i = 0; i < input.Length; i += 3)
+            {
+                var currentMessage = input.Substring(i, 3);
+                result += CompareWithSOS(currentMessage);
+            }
+            Console.WriteLine(result);
+            return result;
+        }
+
+        private static int CompareWithSOS(string message)
+        {
+            var result = 0;
+            var sosString = "SOS";
+
+            for (int i = 0; i < message.Length; i++)
+            {
+                if (message[i] != sosString[i])
+                    result++;
+            }
+
+            return result;
+        }
+
+        private static void Validate(string input)
+        {
+            if (input.Length < 1 || input.Length > 99)
+                throw new ArgumentException("Input length should be between 1 and 99", nameof(input));
+
+            if (input.Length % 3 != 0)
+                throw new ArgumentException("Input length must be a multiple of 3", nameof(input));
+
+            if (input.Any(chr => !char.IsUpper(chr)))
+                throw new ArgumentException("Each input character should be [A-Z] and Upper case", nameof(input));
         }
     }
 
