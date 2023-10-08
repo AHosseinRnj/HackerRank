@@ -31,18 +31,39 @@ namespace MarsExploration
 
             var result = 0;
 
-            for (int i = 0; i < input.Length; i += 3)
+            var listOfMessages = Chunk(input, 3);
+            listOfMessages = listOfMessages.Where(msg => !msg.Equals("SOS")).ToList();
+
+            foreach (var message in listOfMessages)
+                result += CompareWithSOS(message);
+
+            return result;
+        }
+
+        private static List<string> Chunk(string input, int chunkCount)
+        {
+            var result = new List<string>();
+
+            for (int i = 0; i < input.Length; i += chunkCount)
             {
-                if (input[i] != 'S')
-                    result++;
+                var currentMessage = input.Substring(i, chunkCount);
+                result.Add(currentMessage);
+            }
 
-                if (input[i + 1] != 'O')
-                    result++;
+            return result;
+        }
 
-                if (input[i + 2] != 'S')
+        private static int CompareWithSOS(string message)
+        {
+            var result = 0;
+            var sosString = "SOS";
+
+            for (int i = 0; i < message.Length; i++)
+            {
+                if (message[i] != sosString[i])
                     result++;
             }
-            
+
             return result;
         }
 
