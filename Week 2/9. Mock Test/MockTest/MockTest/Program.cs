@@ -25,9 +25,54 @@ namespace MockTest
          * The function accepts 2D_INTEGER_ARRAY matrix as parameter.
          */
 
+        /// Pattern : https://drive.google.com/uc?export=view&id=1t_7fU2LD06qfyIOiFTJ51X8npx0qmcca
         public static int flippingMatrix(List<List<int>> matrix)
         {
-            return 0;
+            Validate(matrix);
+
+            var sum = 0;
+            var Length = matrix.Count;
+
+            for (int row = 0; row < Length / 2; row++)
+            {
+                for (int col = 0; col < Length / 2; col++)
+                {
+                    var topLeft = matrix[row][col];
+                    var topRight = matrix[row][Length - col - 1];
+                    var buttomLeft = matrix[Length - row - 1][col];
+                    var buttomRight = matrix[Length - row - 1][Length - col - 1];
+
+                    sum += GetMax(topLeft, topRight, buttomLeft, buttomRight);
+                }
+            }
+
+            return sum;
+        }
+
+        private static int GetMax(params int[] values)
+        {
+            var max = int.MinValue;
+
+            foreach (var number in values)
+            {
+                if (number > max)
+                    max = number;
+            }
+
+            return max;
+        }
+
+        private static void Validate(List<List<int>> matrix)
+        {
+            var numOfRows = matrix.Count;
+            if (matrix.Any(row => numOfRows != row.Count))
+                throw new ArgumentException("Input matrix should be Square");
+
+            if(matrix.Any(row => numOfRows % 2 != 0 || row.Count % 2 != 0))
+                throw new ArgumentException("Input matrix should be 2n X 2n (even)");
+
+            if (matrix.Any(row => row.Any(val => val < 0 || val > 4096)))
+                throw new ArgumentException("Each matrix elements must be between 0 and 4096");
         }
     }
 
@@ -57,6 +102,8 @@ namespace MockTest
 
             textWriter.Flush();
             textWriter.Close();
+
+            Console.ReadLine();
         }
     }
 }
