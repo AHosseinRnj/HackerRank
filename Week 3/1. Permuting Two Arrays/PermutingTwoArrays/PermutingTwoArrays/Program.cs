@@ -28,9 +28,42 @@ namespace PermutingTwoArrays
          *  3. INTEGER_ARRAY B
          */
 
-        public static string twoArrays(int k, List<int> A, List<int> B)
+        public static string twoArrays(int k, List<int> firstArray, List<int> secondArray)
         {
-            return String.Empty;
+            Validate(k, firstArray, secondArray);
+
+            firstArray.Sort();
+            secondArray = secondArray.OrderByDescending(val => val).ToList();
+
+            var result = "YES";
+            for (int i = 0; i < firstArray.Count; i++)
+            {
+                if (firstArray[i] + secondArray[i] < k)
+                    result = "NO";
+            }
+
+            return result;
+        }
+
+        private static void Validate(int k, List<int> firstArray, List<int> secondArray)
+        {
+            if (firstArray.Count != secondArray.Count)
+                throw new ArgumentException("Arrays should be equal in size");
+
+            if (firstArray.Count < 1 || firstArray.Count > 1000)
+                throw new ArgumentException("Array size should be between 1 and 1000", nameof(firstArray));
+
+            if (secondArray.Count < 1 || secondArray.Count > 1000)
+                throw new ArgumentException("Array size should be between 1 and 1000", nameof(secondArray));
+
+            if (k < 1 || k > Math.Pow(10, 9))
+                throw new ArgumentException("K, Should be between 1 and 10^9", nameof(k));
+
+            if (firstArray.Any(val => val < 0 || val > Math.Pow(10, 9)))
+                throw new ArgumentException("Each array elements should be between 0 and 10^9", nameof(firstArray));
+
+            if (secondArray.Any(val => val < 0 || val > Math.Pow(10, 9)))
+                throw new ArgumentException("Each array elements should be between 0 and 10^9", nameof(secondArray));
         }
     }
 
@@ -61,6 +94,8 @@ namespace PermutingTwoArrays
 
             textWriter.Flush();
             textWriter.Close();
+
+            Console.ReadLine();
         }
     }
 }
