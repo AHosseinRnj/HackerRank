@@ -28,9 +28,36 @@ namespace SubarrayDivision2
          *  3. INTEGER m
          */
 
-        public static int birthday(List<int> s, int d, int m)
+        public static int birthday(List<int> input, int day, int month)
         {
-            return 0;
+            Validate(input, day, month);
+
+            var numOfWays = 0;
+
+            for (int i = 0; i < input.Count; i++)
+            {
+                var sumOfBar = input.Skip(i).Take(month).Sum();
+
+                if (sumOfBar == day)
+                    numOfWays++;
+            }
+
+            return numOfWays;
+        }
+
+        private static void Validate(List<int> input, int day, int month)
+        {
+            if (input.Count < 1 || input.Count > 100)
+                throw new ArgumentException("Array length should be between 1 and 100");
+
+            if (day < 1 || day > 31)
+                throw new ArgumentException("Day should be between 1 and 31", nameof(day));
+
+            if (month < 1 || month > 12)
+                throw new ArgumentException("month should be between 1 and 12", nameof(month));
+
+            if (input.Any(val => val < 1 || val > 5))
+                throw new ArgumentException("Each Array elements must be between 1 and 5");
         }
     }
 
