@@ -51,15 +51,7 @@ namespace MockTest
 
         private static int GetMax(params int[] values)
         {
-            var max = int.MinValue;
-
-            foreach (var number in values)
-            {
-                if (number > max)
-                    max = number;
-            }
-
-            return max;
+            return values.Max();
         }
 
         private static void Validate(List<List<int>> matrix)
@@ -68,8 +60,12 @@ namespace MockTest
             if (matrix.Any(row => numOfRows != row.Count))
                 throw new ArgumentException("Input matrix should be Square");
 
-            if(matrix.Any(row => numOfRows % 2 != 0 || row.Count % 2 != 0))
-                throw new ArgumentException("Input matrix should be 2n X 2n (even)");
+            if (matrix.Any(row => numOfRows % 2 != 0 || row.Count % 2 != 0))
+                throw new ArgumentException("Input matrix should be even");
+
+            var n = numOfRows / 2;
+            if (n < 1 || n > 128)
+                throw new ArgumentException("n should be between 1 and 128", nameof(n));
 
             if (matrix.Any(row => row.Any(val => val < 0 || val > 4096)))
                 throw new ArgumentException("Each matrix elements must be between 0 and 4096");
