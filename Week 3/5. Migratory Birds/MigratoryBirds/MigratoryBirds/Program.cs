@@ -27,7 +27,32 @@ namespace MigratoryBirds
 
         public static int migratoryBirds(List<int> array)
         {
-            return 0;
+           Validate(array);
+
+            var result = 0;
+            var freqMap = new Dictionary<int, int>();
+
+            foreach (var type in array)
+            {
+                if (freqMap.ContainsKey(type))
+                    freqMap[type]++;
+                else
+                    freqMap[type] = 1;
+            }
+
+            var maxFreq = freqMap.Max(pair => pair.Value);
+            result = freqMap.Where(pair => pair.Value == maxFreq).Select(pair => pair.Key).Min();
+
+            return result;
+        }
+
+        private static void Validate(List<int> array)
+        {
+            if (array.Count < 5 || array.Count > Math.Pow(10, 5))
+                throw new ArgumentException("Array size should be between 5 and 10^5", nameof(array.Count));
+
+            if (array.Any(val => val < 1 || val > 5))
+                throw new ArgumentException("Each array elements must be 1,2,3,4, or 5");
         }
     }
 
