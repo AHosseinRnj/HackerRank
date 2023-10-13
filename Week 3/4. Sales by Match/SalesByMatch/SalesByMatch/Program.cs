@@ -29,7 +29,32 @@ namespace SalesByMatch
 
         public static int sockMerchant(int n, List<int> array)
         {
-            return 0;
+            Validate(n, array);
+
+            var pairCount = 0;
+            var colortSet = new HashSet<int>();
+
+            foreach (var color in array)
+            {
+                if (colortSet.Contains(color))
+                {
+                    pairCount++;
+                    colortSet.Remove(color);
+                }
+                else
+                    colortSet.Add(color);
+            }
+
+            return pairCount;
+        }
+
+        public static void Validate(int n, List<int> array)
+        {
+            if (n < 1 || n > 100)
+                throw new ArgumentException("Variable should be between 1 and 100", nameof(n));
+
+            if (array.Any(val => val < 1 || val > 100))
+                throw new ArgumentException("Each array elements must be between 1 and 100", nameof(array));
         }
     }
 
