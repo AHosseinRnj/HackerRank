@@ -48,7 +48,7 @@ namespace SalesByMatch
             return pairCount;
         }
 
-        public static void Validate(int n, List<int> array)
+        private static void Validate(int n, List<int> array)
         {
             if (n < 1 || n > 100)
                 throw new ArgumentException("Variable should be between 1 and 100", nameof(n));
