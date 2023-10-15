@@ -29,31 +29,19 @@ namespace MaximumPerimeterTriangle
         {
             Validate(sticks);
 
-            sticks.Sort();
-
-            var result = new List<int>();
-            var listOfVertices = new List<List<int>>();
+            sticks = sticks.OrderByDescending(val => val).ToList();
 
             for (int i = 0; i < sticks.Count - 2; i++)
             {
                 var firstSide = sticks[i];
                 var secondSide = sticks[i + 1];
                 var thirdSide = sticks[i + 2];
-
-                if (firstSide + secondSide > thirdSide)
-                {
-                    var vertices = new List<int>() { firstSide, secondSide, thirdSide };
-                    listOfVertices.Add(vertices);
-                }
+   
+                if (secondSide + thirdSide > firstSide)
+                    return new List<int> { thirdSide, secondSide, firstSide };
             }
 
-            if (listOfVertices.Count == 0)
-            {
-                result.Add(-1);
-                return result;
-            }
-
-            return listOfVertices.LastOrDefault();
+            return new List<int> { -1 };
         }
 
         private static void Validate(List<int> sticks)
