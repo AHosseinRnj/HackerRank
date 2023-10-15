@@ -34,25 +34,6 @@ namespace SubarrayDivision2
 
             var numOfWays = 0;
 
-            /*
-            var sum = 0;
-            for (int i = 0; i < month; i++)
-                sum += input[i];
-
-            if (sum == day)
-                numOfWays++;
-
-            for (int i = month; i < input.Count; i++)
-            {
-                sum += input[i];
-                sum -= input[i - month];
-
-                if (sum == day)
-                    numOfWays++;
-            }
-            */
-
-            /// New Way :
             for (int i = 0; i < input.Count; i++)
             {
                 var sumOfBar = input.Skip(i).Take(month).Sum();
