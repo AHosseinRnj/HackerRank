@@ -27,7 +27,42 @@ namespace MaximumPerimeterTriangle
 
         public static List<int> maximumPerimeterTriangle(List<int> sticks)
         {
-            return new List<int>();
+            Validate(sticks);
+
+            sticks.Sort();
+
+            var result = new List<int>();
+            var listOfVertices = new List<List<int>>();
+
+            for (int i = 0; i < sticks.Count - 2; i++)
+            {
+                var firstSide = sticks[i];
+                var secondSide = sticks[i + 1];
+                var thirdSide = sticks[i + 2];
+
+                if (firstSide + secondSide > thirdSide)
+                {
+                    var vertices = new List<int>() { firstSide, secondSide, thirdSide };
+                    listOfVertices.Add(vertices);
+                }
+            }
+
+            if (listOfVertices.Count == 0)
+            {
+                result.Add(-1);
+                return result;
+            }
+
+            return listOfVertices.LastOrDefault();
+        }
+
+        private static void Validate(List<int> sticks)
+        {
+            if (sticks.Count < 3 || sticks.Count > 50)
+                throw new ArgumentException("Length of array should be between 3 and 50", nameof(sticks));
+
+            if (sticks.Any(val => val < 1 || val > Math.Pow(10, 9)))
+                throw new ArgumentException("Each array elements should be between 1 and 10^9", nameof(sticks));
         }
     }
 
