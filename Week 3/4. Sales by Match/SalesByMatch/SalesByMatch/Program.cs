@@ -32,17 +32,17 @@ namespace SalesByMatch
             Validate(n, array);
 
             var pairCount = 0;
-            var colortSet = new HashSet<int>();
+            var colorSet = new HashSet<int>();
 
             foreach (var color in array)
             {
-                if (colortSet.Contains(color))
+                if (colorSet.Contains(color))
                 {
                     pairCount++;
-                    colortSet.Remove(color);
+                    colorSet.Remove(color);
                 }
                 else
-                    colortSet.Add(color);
+                    colorSet.Add(color);
             }
 
             return pairCount;
