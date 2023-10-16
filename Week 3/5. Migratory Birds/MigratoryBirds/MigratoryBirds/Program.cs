@@ -27,7 +27,7 @@ namespace MigratoryBirds
 
         public static int migratoryBirds(List<int> array)
         {
-           Validate(array);
+            Validate(array);
 
             var result = 0;
             var freqMap = new Dictionary<int, int>();
@@ -48,10 +48,12 @@ namespace MigratoryBirds
 
         private static void Validate(List<int> array)
         {
-            if (array.Count < 5 || array.Count > Math.Pow(10, 5))
-                throw new ArgumentException("Array size should be between 5 and 10^5", nameof(array.Count));
+            var validList = new List<int> { 1, 2, 3, 4, 5 };
 
-            if (array.Any(val => val < 1 || val > 5))
+            if (array.Count < 5 || array.Count > 2 * Math.Pow(10, 5))
+                throw new ArgumentException("Array size should be between 5 and 2 * 10^5", nameof(array.Count));
+
+            if (array.Any(val => !validList.Contains(val)))
                 throw new ArgumentException("Each array elements must be 1,2,3,4, or 5");
         }
     }
