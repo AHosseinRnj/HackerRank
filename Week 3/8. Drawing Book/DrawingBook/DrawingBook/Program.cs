@@ -29,7 +29,23 @@ namespace DrawingBook
 
         public static int pageCount(int n, int p)
         {
-            return 0;
+            Validate(n, p);
+
+            var middleOfTheBook = n / 2;
+            var turnsFromStart = p / 2;
+            var turnsFromEnd = middleOfTheBook - turnsFromStart;
+
+            var minimumTurns = Math.Min(turnsFromStart, turnsFromEnd);
+            return minimumTurns;
+        }
+
+        private static void Validate(int n, int p)
+        {
+            if (n < 1 || n > Math.Pow(10, 5))
+                throw new ArgumentException("The number of pages, should be between 1 and 10^5", nameof(n));
+
+            if (p < 1 || p > n)
+                throw new ArgumentException("The page number to turn to, should be between 1 and n", nameof(p));
         }
     }
 
