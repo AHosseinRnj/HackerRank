@@ -28,7 +28,59 @@ namespace MockTest
 
         public static int getTotalX(List<int> a, List<int> b)
         {
-            return 0;
+            Validate(a, b);
+
+            var lcm = a[0];
+            for (var i = 1; i < a.Count; i++)
+            {
+                lcm = CalculateLCM(lcm, a[i]);
+            }
+
+            var gcd = b[0];
+            for (var i = 1; i < b.Count; i++)
+            {
+                gcd = CalculateGCD(gcd, b[i]);
+            }
+
+            var count = 0;
+            var multiple = lcm;
+            while (multiple <= gcd)
+            {
+                if (gcd % multiple == 0)
+                    count++;
+
+                multiple += lcm;
+            }
+
+            return count;
+        }
+
+        private static int CalculateLCM(int a, int b)
+        {
+            return (a * b) / CalculateGCD(a, b);
+        }
+
+        private static int CalculateGCD(int a, int b)
+        {
+            if (b == 0)
+                return a;
+
+            return CalculateGCD(b, a % b);
+        }
+
+        private static void Validate(List<int> a, List<int> b)
+        {
+            if (a.Count < 1 || a.Count > 10)
+                throw new ArgumentException("Array count should be between 1 and 10", nameof(a));
+
+            if (b.Count < 1 || b.Count > 10)
+                throw new ArgumentException("Array count should be between 1 and 10", nameof(b));
+
+            if (a.Any(val => val < 1 || val > 100))
+                throw new ArgumentException("Each array elements must be between 1 and 100", nameof(a));
+
+            if (b.Any(val => val < 1 || val > 100))
+                throw new ArgumentException("Each array elements must be between 1 and 100", nameof(b));
         }
     }
 
