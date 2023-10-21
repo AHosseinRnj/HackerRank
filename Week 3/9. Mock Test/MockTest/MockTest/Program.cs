@@ -30,6 +30,46 @@ namespace MockTest
         {
             Validate(a, b);
 
+            // Brute-Force
+            /*
+            var minA = a.Min();
+            var maxB = b.Max();
+            var result = new List<int>();
+
+            for (int i = minA; i <= maxB; i++)
+            {
+                bool skip = false;
+
+                // Check if i is a factor of all numbers in a
+                foreach (int j in a)
+                {
+                    if (i % j != 0)
+                    {
+                        skip = true;
+                        break;
+                    }
+                }
+
+                if (!skip)
+                {
+                    // Check if i is a factor of all numbers in b
+                    foreach (int j in b)
+                    {
+                        if (j % i != 0)
+                        {
+                            skip = true;
+                            break;
+                        }
+                    }
+                }
+
+                if (!skip)
+                    result.Add(i);
+            }
+
+            return result.Count;
+            */
+
             var lcm = a[0];
             for (var i = 1; i < a.Count; i++)
             {
