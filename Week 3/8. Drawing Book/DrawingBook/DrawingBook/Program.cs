@@ -31,6 +31,55 @@ namespace DrawingBook
         {
             Validate(n, p);
 
+            // Brute-force
+            /*
+            var minimumTurns = 0;
+            var middleOfTheBook = n / 2;
+
+            if (p == 1)
+                return minimumTurns;
+
+            // Num of total pages is even
+            if (n % 2 == 0)
+            {
+                if (p == n)
+                    return minimumTurns;
+
+                n -= 1;
+            }
+            else
+            {
+                if (p == n || p == n - 1)
+                    return minimumTurns;
+
+                n -= 2;
+            }
+            minimumTurns++;
+
+            if (p <= middleOfTheBook)
+            {
+                for (var i = 2; i <= middleOfTheBook; i += 2)
+                {
+                    if (p == i || p == i + 1)
+                        return minimumTurns;
+
+                    minimumTurns++;
+                }
+            }
+            else
+            {
+                for (var i = n; i >= middleOfTheBook; i -= 2)
+                {
+                    if (p == i || p == i - 1)
+                        return minimumTurns;
+
+                    minimumTurns++;
+                }
+            }
+
+            return minimumTurns;
+            */
+
             var middleOfTheBook = n / 2;
             var turnsFromStart = p / 2;
             var turnsFromEnd = middleOfTheBook - turnsFromStart;
