@@ -43,8 +43,9 @@
             //var max = int.MinValue;
             //for (int i = 0; i < a.Count; i++)
             //{
-            //    var countOfFirstElement = a.Where(val => val == i).Count();
-            //    var countOfSecondElement = a.Where(val => val == i - 1).Count();
+            //    var currItem = a[i];
+            //    var countOfFirstElement = a.Where(val => val == currItem).Count();
+            //    var countOfSecondElement = a.Where(val => val == currItem - 1).Count();
             //    var total = countOfFirstElement + countOfSecondElement;
 
             //    if(total > max)
