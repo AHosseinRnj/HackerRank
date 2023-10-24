@@ -16,8 +16,7 @@
         {
             Validate(d, arr);
 
-            // 1st Way O(N + N):
-            /*
+            // 1st Way O(N):
             var tempList = new List<int>();
             for (int i = d; i < arr.Count; i++)
                 tempList.Add(arr[i]);
@@ -26,9 +25,9 @@
                 tempList.Add(arr[i]);
 
             return tempList;
-            */
 
             // 2nd Way O(d * N) - ** Time limit **:
+            /*
             var shiftCount = 1;
             var totalShift = d;
 
@@ -44,6 +43,7 @@
             }
 
             return arr;
+            */
         }
 
         private static void Validate(int d, List<int> arr)
