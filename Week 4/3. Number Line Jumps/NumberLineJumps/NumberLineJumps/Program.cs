@@ -16,7 +16,53 @@
 
         public static string kangaroo(int x1, int v1, int x2, int v2)
         {
-            return string.Empty;
+            Validate(x1, v1, x2, v2);
+
+            /// 1st. Way:
+            /*
+            var firstAnimalLocation = x1;
+            var secondAnimalLocation = x2;
+
+            for (int i = x1; i <= x2; i++)
+            {
+                if (firstAnimalLocation == secondAnimalLocation)
+                    return "YES";
+
+                firstAnimalLocation += v1;
+                secondAnimalLocation += v2;
+            }
+
+            return "NO";
+            */
+
+            /// 2nd. Way:
+            var relativeSpeed = v2 - v1;
+            if (relativeSpeed == 0 || v1 <= v2)
+                return "NO";
+
+            var relativeLocation = x2 - x1;
+            if (relativeLocation % relativeSpeed >= 0)
+                return "YES";
+            else
+                return "NO";
+        }
+
+        private static void Validate(int x1, int v1, int x2, int v2)
+        {
+            if (x2 < x1)
+                throw new ArgumentException("x2 must be greater that x1");
+
+            if (x2 < 0 || x2 > 10000)
+                throw new ArgumentException("x2 should be between 0 and 10000", nameof(x2));
+
+            if (x1 < 0 || x1 > 10000)
+                throw new ArgumentException("x1 should be between 0 and 10000", nameof(x1));
+
+            if (v1 < 1 || v1 > 10000)
+                throw new ArgumentException("v1 should be between 1 and 10000", nameof(v1));
+
+            if (v2 < 1 || v2 > 10000)
+                throw new ArgumentException("v2 should be between 1 and 10000", nameof(v2));
         }
     }
 
