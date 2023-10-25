@@ -36,10 +36,10 @@
             */
 
             /// 2nd. Way:
-            var relativeSpeed = v2 - v1;
-            if (relativeSpeed == 0 || v1 <= v2)
+            if (v1 <= v2)
                 return "NO";
 
+            var relativeSpeed = v2 - v1;
             var relativeLocation = x2 - x1;
             if (relativeLocation % relativeSpeed >= 0)
                 return "YES";
