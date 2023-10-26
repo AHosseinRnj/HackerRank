@@ -11,7 +11,36 @@
 
         public static void separateNumbers(string s)
         {
+            Validate(s);
 
+            var subString = string.Empty;
+
+            for (int i = 1; i <= s.Length / 2; i++)
+            {
+                subString = s.Substring(0, i);
+                var validString = subString;
+                var number = Int64.Parse(subString);
+
+                while (validString.Length < s.Length)
+                    validString += (number += 1);
+
+                if (s.Equals(validString))
+                {
+                    Console.WriteLine($"YES {subString}");
+                    return;
+                }
+            }
+
+            Console.WriteLine("NO");
+        }
+
+        private static void Validate(string s)
+        {
+            if (s.Length < 1 || s.Length > 32)
+                throw new ArgumentException("Input lenght should be between 1 and 32", nameof(s.Length));
+
+            if (s.Any(val => val < '0' || val > '9'))
+                throw new ArgumentException("Each digit must between 0 and 9", nameof(s));
         }
     }
 
