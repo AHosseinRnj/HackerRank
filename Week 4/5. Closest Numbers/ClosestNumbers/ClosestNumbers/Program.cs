@@ -12,7 +12,44 @@
 
         public static List<int> closestNumbers(List<int> arr)
         {
-            return new List<int>();
+            Validate(arr);
+
+            arr.Sort();
+
+            var minDiffrence = Int32.MaxValue;
+            var result = new List<int>();
+
+            for (int i = 0; i < arr.Count - 1; i++)
+            {
+                var firstNumber = arr[i];
+                var secondNumber = arr[i + 1];
+                var diffrence = secondNumber - firstNumber;
+
+                if (diffrence == minDiffrence)
+                {
+                    minDiffrence = diffrence;
+                    result.Add(firstNumber);
+                    result.Add(secondNumber);
+                }
+                else if (diffrence < minDiffrence)
+                {
+                    result.Clear();
+                    minDiffrence = diffrence;
+                    result.Add(firstNumber);
+                    result.Add(secondNumber);
+                }
+            }
+
+            return result;
+        }
+
+        private static void Validate(List<int> arr)
+        {
+            if (arr.Count < 2 || arr.Count > 200000)
+                throw new ArgumentException("Array length Should be between 2 and 200000", nameof(arr.Count));
+
+            if (arr.Any(val => val < Math.Pow(-10, 7) || val > Math.Pow(10, 7)))
+                throw new ArgumentException("Each array elements must be between -10^7 and 10^7", nameof(arr));
         }
     }
 
