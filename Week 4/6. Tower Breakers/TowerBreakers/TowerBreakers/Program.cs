@@ -14,7 +14,21 @@
 
         public static int towerBreakers(int n, int m)
         {
-            return 0;
+            Validate(n, m);
+
+            if (m == 1 || n % 2 == 0)
+                return 2;
+            else
+                return 1;
+        }
+
+        private static void Validate(int n, int m)
+        {
+            if (n < 1 || n > Math.Pow(10, 6))
+                throw new ArgumentException("Variable n, should be between 1 and 10^6", nameof(n));
+
+            if (m < 1 || m > Math.Pow(10, 6))
+                throw new ArgumentException("Variable m, should be between 1 and 10^6", nameof(m));
         }
     }
 
