@@ -25,16 +25,14 @@
                 var secondNumber = arr[i + 1];
                 var diffrence = secondNumber - firstNumber;
 
-                if (diffrence == minDiffrence)
+
+                if (diffrence <= minDiffrence)
                 {
+                    if (diffrence < minDiffrence)
+                        result.Clear();
+
                     minDiffrence = diffrence;
-                    result.Add(firstNumber);
-                    result.Add(secondNumber);
-                }
-                else if (diffrence < minDiffrence)
-                {
-                    result.Clear();
-                    minDiffrence = diffrence;
+
                     result.Add(firstNumber);
                     result.Add(secondNumber);
                 }
