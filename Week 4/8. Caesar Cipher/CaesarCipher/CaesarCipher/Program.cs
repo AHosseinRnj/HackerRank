@@ -1,4 +1,6 @@
-﻿namespace CaesarCipher
+﻿using System.Text;
+
+namespace CaesarCipher
 {
     class Result
     {
@@ -14,7 +16,32 @@
 
         public static string caesarCipher(string s, int k)
         {
-            return string.Empty;
+            Validate(s, k);
+
+            var strBuilder = new StringBuilder(s.Length);
+
+            foreach (var character in s)
+            {
+                if (char.IsLetter(character))
+                {
+                    var baseChar = char.IsUpper(character) ? 'A' : 'a';
+                    var shiftedLetter = (char)(baseChar + (character - baseChar + k) % 26);
+                    strBuilder.Append(shiftedLetter);
+                }
+                else
+                    strBuilder.Append(character);
+            }
+
+            return strBuilder.ToString();
+        }
+
+        private static void Validate(string s, int k)
+        {
+            if (k < 0 || k > 100)
+                throw new ArgumentException("Variable should be between 0 and 100", nameof(k));
+
+            if (s.Any(chr => char.IsWhiteSpace(chr)))
+                throw new ArgumentException("The input should not contain spaces", nameof(s));
         }
     }
 
