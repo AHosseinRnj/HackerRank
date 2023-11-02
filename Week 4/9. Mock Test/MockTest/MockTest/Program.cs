@@ -12,7 +12,41 @@
 
         public static int anagram(string s)
         {
-            return 0;
+            Validate(s);
+
+            if (s.Length % 2 != 0)
+                return -1;
+
+            var result = 0;
+            var mid = s.Length / 2;
+            var dictionary = new Dictionary<char, int>();
+
+            for (int i = 0; i < mid; i++)
+            {
+                if (dictionary.ContainsKey(s[i]))
+                    dictionary[s[i]]++;
+                else
+                    dictionary[s[i]] = 1;
+            }
+
+            for (int i = mid; i < s.Length; i++)
+            {
+                if (dictionary.ContainsKey(s[i]) && dictionary[s[i]] > 0)
+                    dictionary[s[i]]--;
+                else
+                    result++;
+            }
+
+            return result;
+        }
+
+        private static void Validate(string s)
+        {
+            if (s.Length < 1 || s.Length > Math.Pow(10, 4))
+                throw new ArgumentException("The string length should be between 1 and 10^4", nameof(s));
+
+            if (s.Any(val => !char.IsLetter(val)))
+                throw new ArgumentException("Only Letters are allowed", nameof(s));
         }
     }
 
