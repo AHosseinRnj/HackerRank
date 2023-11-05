@@ -1,4 +1,6 @@
-﻿namespace StrongPassword
+﻿using System.Runtime.InteropServices;
+
+namespace StrongPassword
 {
     class Result
     {
@@ -14,7 +16,35 @@
 
         public static int minimumNumber(int n, string password)
         {
-            return 0;
+            Validate(n, password);
+
+            int result = 0;
+
+            if (!password.Any(char.IsDigit))
+                result++;
+            if (!password.Any(char.IsLower))
+                result++;
+            if (!password.Any(char.IsUpper))
+                result++;
+            if (!password.Any(c => char.IsPunctuation(c) || char.IsSymbol(c)))
+                result++;
+
+            while (result + n < 6)
+                result++;
+
+            return result;
+        }
+
+        private static void Validate(int n, string password)
+        {
+            if (n < 1 || n > 100)
+                throw new ArgumentException("n Should be between 1 and 100", nameof(n));
+
+            if (password.Length < 1 || password.Length > 100)
+                throw new ArgumentException("Password Length should be between 1 and 100", nameof(password.Length));
+
+            if (!password.Any(val => !char.IsLetter(val) || !char.IsDigit(val) || !char.IsPunctuation(val) || !char.IsSymbol(val)))
+                throw new ArgumentException("Only Letters, Digits and symbols are Valid", nameof(password));
         }
     }
 
