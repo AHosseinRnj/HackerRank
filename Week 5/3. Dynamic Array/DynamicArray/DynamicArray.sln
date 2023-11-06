@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34221.43
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicArray", "DynamicArray\DynamicArray.csproj", "{955EC2FE-5F7F-48FF-940F-0544E64BFC4B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{955EC2FE-5F7F-48FF-940F-0544E64BFC4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{955EC2FE-5F7F-48FF-940F-0544E64BFC4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{955EC2FE-5F7F-48FF-940F-0544E64BFC4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{955EC2FE-5F7F-48FF-940F-0544E64BFC4B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7E95C120-3D84-4A22-8532-253EBA3BCA67}
+	EndGlobalSection
+EndGlobal
