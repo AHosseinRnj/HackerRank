@@ -14,7 +14,42 @@
 
         public static List<int> dynamicArray(int n, List<List<int>> queries)
         {
-            return new List<int>();
+            Validate(n, queries);
+
+            var lastAnswer = 0;
+            var lastAnswers = new List<int>();
+            var seqList = new List<List<int>>();
+
+            for (int i = 0; i < n; i++)
+                seqList.Add(new List<int>());
+
+            foreach (var query in queries)
+            {
+                var index = (query[1] ^ lastAnswer) % n;
+
+                if (query.First() == 1)
+                    seqList[index].Add(query.Last());
+                else
+                {
+                    var y = query.Last();
+                    var size = seqList[index].Count();
+
+                    lastAnswer = seqList[index][y % size];
+                    lastAnswers.Add(lastAnswer);
+                }
+            }
+
+            return lastAnswers;
+        }
+
+        private static void Validate(int n, List<List<int>> queries)
+        {
+            if (n < 1 || n > Math.Pow(10, 5))
+                throw new ArgumentException("Array size should be between 1 and 10^5", nameof(n));
+
+            var queriesCount = queries.Count;
+            if (queriesCount < 1 || queriesCount > Math.Pow(10, 5))
+                throw new ArgumentException("Queries count should be between 1 and 10^5", nameof(queriesCount));
         }
     }
 
