@@ -16,6 +16,7 @@
         {
             Validate(arr, brr);
 
+            /*
             var result = new List<int>();
             var arrFreqMap = new Dictionary<int, int>();
             var brrFreqMap = new Dictionary<int, int>();
@@ -46,6 +47,13 @@
             result.Sort();
 
             return result;
+            */
+
+            arr.ForEach(n => brr.Remove(n));
+            brr = brr.Distinct().ToList();
+            brr.Sort();
+
+            return brr;
         }
 
         public static void Validate(List<int> arr, List<int> brr)
