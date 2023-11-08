@@ -31,7 +31,6 @@
                     result[index].Add(value);
             }
 
-
             /*
             var output = string.Join(" ", result.Select(val => string.Join(" ", val))).Trim();
             Console.WriteLine(output);
