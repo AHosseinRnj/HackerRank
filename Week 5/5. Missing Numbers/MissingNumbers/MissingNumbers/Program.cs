@@ -14,7 +14,56 @@
 
         public static List<int> missingNumbers(List<int> arr, List<int> brr)
         {
-            return new List<int>();
+            Validate(arr, brr);
+
+            var result = new List<int>();
+            var arrFreqMap = new Dictionary<int, int>();
+            var brrFreqMap = new Dictionary<int, int>();
+
+            foreach (var num in brr)
+            {
+                if (brrFreqMap.ContainsKey(num))
+                    brrFreqMap[num]++;
+                else
+                    brrFreqMap[num] = 1;
+            }
+
+            foreach (var num in arr)
+            {
+                if (arrFreqMap.ContainsKey(num))
+                    arrFreqMap[num]++;
+                else
+                    arrFreqMap[num] = 1;
+            }
+
+            foreach (var num in brr)
+            {
+                if (!arrFreqMap.ContainsKey(num) || brrFreqMap[num] != arrFreqMap[num])
+                    result.Add(num);
+            }
+
+            result = result.Distinct().ToList();
+            result.Sort();
+
+            return result;
+        }
+
+        public static void Validate(List<int> arr, List<int> brr)
+        {
+            var arrLength = arr.Count;
+            var brrLength = brr.Count;
+
+            if (arrLength < 1 || arrLength > 2 * Math.Pow(10, 5))
+                throw new ArgumentException("The length of array should be betwwen 1 and 2 * 10^5", nameof(arr));
+
+            if (brrLength < 1 || brrLength > 2 * Math.Pow(10, 5))
+                throw new ArgumentException("The length of array should be betwwen 1 and 2 * 10^5", nameof(brr));
+
+            if (arrLength > brrLength)
+                throw new ArgumentException("First array length should be less than or equal to the second array length.", nameof(arr));
+
+            if (brr.Max() - brr.Min() > 100)
+                throw new ArgumentException("The range of values in the array should be less than or equal to 100", nameof(brr));
         }
     }
 
