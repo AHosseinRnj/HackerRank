@@ -29,8 +29,8 @@ namespace StrongPassword
             if (!password.Any(c => char.IsPunctuation(c) || char.IsSymbol(c)))
                 result++;
 
-            while (result + n < 6)
-                result++;
+            if (result + n < 6)
+                result = 6 - n;
 
             return result;
         }
@@ -43,7 +43,7 @@ namespace StrongPassword
             if (password.Length < 1 || password.Length > 100)
                 throw new ArgumentException("Password Length should be between 1 and 100", nameof(password.Length));
 
-            if (!password.Any(val => !char.IsLetter(val) || !char.IsDigit(val) || !char.IsPunctuation(val) || !char.IsSymbol(val)))
+            if (password.Any(val => !char.IsLetter(val) && !char.IsDigit(val) && !char.IsPunctuation(val) && !char.IsSymbol(val)))
                 throw new ArgumentException("Only Letters, Digits and symbols are Valid", nameof(password));
         }
     }
