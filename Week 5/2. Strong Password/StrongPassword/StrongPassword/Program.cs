@@ -1,6 +1,4 @@
-﻿using System.Runtime.InteropServices;
-
-namespace StrongPassword
+﻿namespace StrongPassword
 {
     class Result
     {
@@ -18,6 +16,7 @@ namespace StrongPassword
         {
             Validate(n, password);
 
+            /*
             int result = 0;
 
             if (!password.Any(char.IsDigit))
@@ -33,6 +32,18 @@ namespace StrongPassword
                 result = 6 - n;
 
             return result;
+            */
+
+            // Builder Pattern :
+
+            var passwordValidator = new PasswordValidatorBuilder(password)
+                .RequireDigit()
+                .RequireLowercase()
+                .RequireUppercase()
+                .RequireSpecialCharacter()
+                .Build();
+
+            return passwordValidator.GetMinimumChanges();
         }
 
         private static void Validate(int n, string password)
@@ -45,6 +56,71 @@ namespace StrongPassword
 
             if (password.Any(val => !char.IsLetter(val) && !char.IsDigit(val) && !char.IsPunctuation(val) && !char.IsSymbol(val)))
                 throw new ArgumentException("Only Letters, Digits and symbols are Valid", nameof(password));
+        }
+    }
+
+    public class PasswordValidatorBuilder
+    {
+        private int _result = 0;
+        private readonly string _password;
+
+        public PasswordValidatorBuilder(string password)
+        {
+            _password = password;
+        }
+
+        public PasswordValidatorBuilder RequireDigit()
+        {
+            if (!_password.Any(char.IsDigit))
+                _result++;
+            return this;
+        }
+
+        public PasswordValidatorBuilder RequireLowercase()
+        {
+            if (!_password.Any(char.IsLower))
+                _result++;
+            return this;
+        }
+
+        public PasswordValidatorBuilder RequireUppercase()
+        {
+            if (!_password.Any(char.IsUpper))
+                _result++;
+            return this;
+        }
+
+        public PasswordValidatorBuilder RequireSpecialCharacter()
+        {
+            if (!_password.Any(c => char.IsPunctuation(c) || char.IsSymbol(c)))
+                _result++;
+            return this;
+        }
+
+        public PasswordValidator Build()
+        {
+            return new PasswordValidator(_result, _password);
+        }
+
+    }
+
+    public class PasswordValidator
+    {
+        private int _result;
+        private readonly string _password;
+        private const int MinLength = 6;
+
+        public PasswordValidator(int result, string password)
+        {
+            _result = result;
+            _password = password;
+        }
+
+        public int GetMinimumChanges()
+        {
+            if (_result + _password.Length < MinLength)
+                _result = MinLength - _password.Length;
+            return _result;
         }
     }
 
