@@ -18,10 +18,14 @@
 
             var lastAnswer = 0;
             var lastAnswers = new List<int>();
-            var seqList = new List<List<int>>();
 
+            /*
+            var seqList = new List<List<int>>();
             for (int i = 0; i < n; i++)
                 seqList.Add(new List<int>());
+            */
+
+            var seqList = Enumerable.Range(0, n).Select(_ => new List<int>()).ToList();
 
             foreach (var query in queries)
             {
