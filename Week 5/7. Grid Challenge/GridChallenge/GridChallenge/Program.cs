@@ -17,9 +17,7 @@
             var result = "YES";
 
             for (int i = 0; i < grid.Count; i++)
-            {
                 grid[i] = string.Join("", grid[i].OrderBy(chr => chr));
-            }
 
             var numOfRows = grid.Count;
             var numOfCols = grid[0].Length;
