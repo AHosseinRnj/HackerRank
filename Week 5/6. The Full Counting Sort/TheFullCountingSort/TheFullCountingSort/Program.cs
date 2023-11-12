@@ -14,11 +14,7 @@
             Validate(arr);
 
             var mid = arr.Count / 2;
-            var result = new List<List<string>>();
-            for (int i = 0; i < 100; i++)
-            {
-                result.Add(new List<string>());
-            }
+            var result = Enumerable.Range(0, 100).Select(_ => new List<string>()).ToList();
 
             for (int i = 0; i < arr.Count; i++)
             {
@@ -30,11 +26,6 @@
                 else
                     result[index].Add(value);
             }
-
-            /*
-            var output = string.Join(" ", result.Select(val => string.Join(" ", val))).Trim();
-            Console.WriteLine(output);
-            */
 
             foreach (var strings in result)
                 foreach (var str in strings)
