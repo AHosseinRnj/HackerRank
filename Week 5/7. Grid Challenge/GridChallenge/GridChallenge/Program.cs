@@ -12,7 +12,40 @@
 
         public static string gridChallenge(List<string> grid)
         {
-            return string.Empty;
+            Validate(grid);
+
+            var result = "YES";
+
+            for (int i = 0; i < grid.Count; i++)
+            {
+                grid[i] = string.Join("", grid[i].OrderBy(chr => chr));
+            }
+
+            var numOfRows = grid.Count;
+            var numOfCols = grid[0].Length;
+            for (int col = 0; col < numOfCols; col++)
+            {
+                for (int row = 1; row < numOfRows; row++)
+                {
+                    if (grid[row][col] < grid[row - 1][col])
+                        result = "NO";
+                }
+            }
+
+            return result;
+        }
+
+        private static void Validate(List<string> grid)
+        {
+            var numOfRows = grid.Count;
+            //if (grid.Any(row => numOfRows != row.Length))
+            //    throw new ArgumentException("Input matrix should be Square", nameof(grid));
+
+            if (numOfRows < 1 || numOfRows > 100)
+                throw new ArgumentException("Number of rows should be between 1 and 100 ", nameof(numOfRows));
+
+            if (grid.Any(row => !row.Any(char.IsLower)))
+                throw new ArgumentException("All characters in the grid should be lowercase.", nameof(grid));
         }
     }
 
