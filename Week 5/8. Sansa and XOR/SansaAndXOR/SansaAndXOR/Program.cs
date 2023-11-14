@@ -12,7 +12,30 @@
 
         public static int sansaXor(List<int> arr)
         {
-            return 0;
+            Validate(arr);
+
+            var arrayCount = arr.Count;
+            if (arrayCount % 2 == 0)
+                return 0;
+
+            var result = 0;
+            for (var index = 0; index < arrayCount; index++)
+            {
+                if (index % 2 == 0)
+                    result = result ^ arr[index];
+            }
+
+            return result;
+        }
+
+        private static void Validate(List<int> arr)
+        {
+            var arrayCount = arr.Count;
+            if (arrayCount < 2 || arrayCount > Math.Pow(10, 5))
+                throw new ArgumentException("nvalid array count. The count must be between 2 and 10^5", nameof(arrayCount));
+
+            if (arr.Any(val => val < 1 || val > Math.Pow(10, 8)))
+                throw new ArgumentException("Invalid array element. All array elements must be between 1 and 10^8", nameof(arr));
         }
     }
 
