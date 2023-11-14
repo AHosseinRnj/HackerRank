@@ -1,5 +1,17 @@
 ﻿namespace TheFullCountingSort
 {
+    class IndexValuePair
+    {
+        public readonly int Index;
+        public readonly string Value;
+
+        public IndexValuePair(int index, string value)
+        {
+            Index = index;
+            Value = value;
+        }
+    }
+
     class Result
     {
 
@@ -14,7 +26,7 @@
             Validate(arr);
 
             var mid = arr.Count / 2;
-            var result = Enumerable.Range(0, 100).Select(_ => new List<string>()).ToList();
+            var pair = new List<IndexValuePair>();
 
             for (int i = 0; i < arr.Count; i++)
             {
@@ -22,14 +34,15 @@
                 var value = arr[i][1];
 
                 if (i < mid)
-                    result[index].Add("-");
+                    pair.Add(new IndexValuePair(index, "-"));
                 else
-                    result[index].Add(value);
+                    pair.Add(new IndexValuePair(index, value));
             }
 
-            foreach (var strings in result)
-                foreach (var str in strings)
-                    Console.Write(str + " ");
+            var result = pair.OrderBy(pair => pair.Index).Select(pair => pair.Value);
+            var output = string.Join(" ", result);
+
+            Console.WriteLine(output);
         }
 
         private static void Validate(List<List<string>> arr)
