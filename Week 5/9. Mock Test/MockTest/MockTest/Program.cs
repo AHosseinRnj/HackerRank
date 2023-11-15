@@ -1,4 +1,6 @@
-﻿namespace MockTest
+﻿using System.Numerics;
+
+namespace MockTest
 {
     class Result
     {
@@ -13,9 +15,34 @@
          *  3. INTEGER n
          */
 
-        public static int fibonacciModified(int t1, int t2, int n)
+        public static BigInteger fibonacciModified(int t1, int t2, int n)
         {
-            return 0;
+            Validate(t1, t2, n);
+
+            BigInteger temp1 = t1;
+            BigInteger temp2 = t2;
+            BigInteger nextT = 0;
+
+            for (int i = 0; i < n - 2; i++)
+            {
+                nextT = temp1 + (temp2 * temp2);
+                temp1 = temp2;
+                temp2 = nextT;
+            }
+
+            return nextT;
+        }
+
+        private static void Validate(int t1, int t2, int n)
+        {
+            if (t1 < 0 || t1 > 2)
+                throw new ArgumentException("Invalid value, Must be between 0 and 2.", nameof(t1));
+
+            if (t2 < 0 || t2 > 2)
+                throw new ArgumentException("Invalid value, Must be between 0 and 2.", nameof(t2));
+
+            if (n < 3 || n > 20)
+                throw new ArgumentException("Invalid value, Must be between 3 and 20.", nameof(n));
         }
     }
 
@@ -33,7 +60,7 @@
 
             int n = Convert.ToInt32(firstMultipleInput[2]);
 
-            int result = Result.fibonacciModified(t1, t2, n);
+            var result = Result.fibonacciModified(t1, t2, n);
 
             textWriter.WriteLine(result);
 
