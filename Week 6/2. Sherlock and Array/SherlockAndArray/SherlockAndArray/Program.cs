@@ -12,7 +12,34 @@
 
         public static string balancedSums(List<int> arr)
         {
-            return string.Empty;
+            Validate(arr);
+
+            if (arr.Count == 1)
+                return "YES";
+
+            var leftSum = 0;
+            var rightSum = arr.Skip(1).Sum();
+
+            for (int i = 0; i < arr.Count - 1; i++)
+            {
+                if (leftSum == rightSum)
+                    return "YES";
+
+                leftSum += arr[i];
+                rightSum -= arr[i + 1];
+            }
+
+            return "NO";
+        }
+
+        private static void Validate(List<int> arr)
+        {
+            var arrayCount = arr.Count;
+            if (arrayCount < 1 || arrayCount > Math.Pow(10, 5))
+                throw new ArgumentException("Array length should be between 1 and 10^5", nameof(arrayCount));
+
+            if (arr.Any(val => val < 0 || val > 2 * Math.Pow(10, 4)))
+                throw new ArgumentException("Each array elements should be between 0 and 2 * 10^4", nameof(arr));
         }
     }
 
