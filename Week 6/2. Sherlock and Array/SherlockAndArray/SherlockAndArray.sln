@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34202.233
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SherlockAndArray", "SherlockAndArray\SherlockAndArray.csproj", "{844A9AC7-C996-4B2C-A1F1-F80AE98D2583}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{844A9AC7-C996-4B2C-A1F1-F80AE98D2583}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{844A9AC7-C996-4B2C-A1F1-F80AE98D2583}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{844A9AC7-C996-4B2C-A1F1-F80AE98D2583}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{844A9AC7-C996-4B2C-A1F1-F80AE98D2583}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D2AC9E93-C0A7-46D5-AC73-99D1CBCDE58A}
+	EndGlobalSection
+EndGlobal
