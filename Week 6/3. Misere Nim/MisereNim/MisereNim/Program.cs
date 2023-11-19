@@ -10,9 +10,34 @@
          * The function accepts INTEGER_ARRAY s as parameter.
          */
 
+        /// https://en.wikipedia.org/wiki/Nim
         public static string misereNim(List<int> s)
         {
-            return string.Empty;
+            Validate(s);
+
+            var arraySum = s.Sum();
+            var arraySize = s.Count();
+
+            // If all elements are 1
+            if (arraySum == arraySize)
+                return (arraySize % 2 == 0) ? "First" : "Second";
+            else
+            {
+                var xor = 0;
+                foreach (var stoneSize in s)
+                    xor ^= stoneSize;
+
+                return xor > 0 ? "First" : "Second";
+            }
+        }
+
+        private static void Validate(List<int> s)
+        {
+            if (s.Count < 1 || s.Count > 100)
+                throw new ArgumentException("List Length should be between 1 and 100", nameof(s.Count));
+
+            if (s.Any(val => val < 1 || val > Math.Pow(10, 9)))
+                throw new ArgumentException("Each list elements must be between 1 and 10^9", nameof(s));
         }
     }
 
