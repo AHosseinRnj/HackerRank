@@ -20,13 +20,17 @@
             var leftSum = 0;
             var rightSum = arr.Skip(1).Sum();
 
+            if (leftSum == rightSum)
+                return "YES";
+
             for (int i = 0; i < arr.Count - 1; i++)
             {
-                if (leftSum == rightSum)
-                    return "YES";
 
                 leftSum += arr[i];
                 rightSum -= arr[i + 1];
+
+                if (leftSum == rightSum)
+                    return "YES";
             }
 
             return "NO";
