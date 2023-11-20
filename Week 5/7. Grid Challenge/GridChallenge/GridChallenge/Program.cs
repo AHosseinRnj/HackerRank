@@ -17,20 +17,31 @@
             var result = "YES";
 
             for (int i = 0; i < grid.Count; i++)
-                grid[i] = string.Join("", grid[i].OrderBy(chr => chr));
-
-            var numOfRows = grid.Count;
-            var numOfCols = grid[0].Length;
-            for (int col = 0; col < numOfCols; col++)
             {
-                for (int row = 1; row < numOfRows; row++)
-                {
-                    if (grid[row][col] < grid[row - 1][col])
-                        result = "NO";
-                }
+                var sortedRow = string.Concat(grid[i].OrderBy(chr => chr));
+                grid[i] = sortedRow;
             }
 
+            var columns = TransposeStrings(grid);
+
+            if (columns.Any(item => item != string.Concat(item.OrderBy(chr => chr))))
+                result = "NO";
+
             return result;
+        }
+
+        static List<string> TransposeStrings(List<string> inputStrings)
+        {
+            List<string> transposedStrings = new List<string>();
+
+            int maxLength = inputStrings.Max(s => s.Length);
+
+            List<string> paddedStrings = inputStrings.Select(s => s.PadRight(maxLength)).ToList();
+
+            for (int i = 0; i < maxLength; i++)
+                transposedStrings.Add(new string(paddedStrings.Select(s => s[i]).ToArray()));
+
+            return transposedStrings;
         }
 
         private static void Validate(List<string> grid)
