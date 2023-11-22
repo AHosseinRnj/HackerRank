@@ -12,7 +12,56 @@
 
         public static string counterGame(long n)
         {
-            return string.Empty;
+            Validate(n);
+
+            /* Time Limit :
+            var number = n;
+            var currentPlayer = 1;
+
+            while (number > 1)
+            {
+                if (IsPowerOfTwo(number))
+                    number = number / 2;
+                else
+                    number = n - NextPowerOfTwo(number);
+
+                currentPlayer = currentPlayer == 1 ? 2 : 1;
+            }
+
+            return currentPlayer == 1 ? "Richard" : "Louise";
+            */
+
+            var counter = 0;
+            var number = n - 1;
+
+            while (number > 0)
+            {
+                if ((number & 1) == 1)
+                    counter++;
+
+                number >>= 1;
+            }
+
+            return counter % 2 == 0 ? "Richard" : "Louise";
+        }
+
+        private static bool IsPowerOfTwo(long n)
+        {
+            var logResult = Math.Log2(n);
+            return Math.Floor(logResult) == logResult;
+        }
+
+        private static long NextPowerOfTwo(long n)
+        {
+            var power = Math.Log2(n);
+            var result = (long)Math.Pow(2, Math.Floor(power));
+            return result;
+        }
+
+        private static void Validate(long n)
+        {
+            if (n < 1 || n > Math.Pow(2, 64) - 1)
+                throw new ArgumentException("input should be between 1 and 2^64 - 1", nameof(n));
         }
     }
 
