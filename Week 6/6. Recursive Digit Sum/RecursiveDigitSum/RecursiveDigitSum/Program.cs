@@ -12,9 +12,43 @@
          *  2. INTEGER k
          */
 
-        public static int superDigit(string n, int k)
+        public static long superDigit(string n, int k)
         {
-            return 0;
+            Validate(n, k);
+
+            /*
+            long initialNum = 0;
+            foreach (var number in n)
+                initialNum += long.Parse(number.ToString());
+
+            long superNum = initialNum * k;
+            while (superNum > 9)
+            {
+                long sum = 0;
+                foreach (var number in superNum.ToString())
+                    sum += long.Parse(number.ToString());
+
+                superNum = sum;
+            }
+
+            return superNum;
+            */
+
+            long sum = (long)n.Select(char.GetNumericValue).Sum() * k;
+
+            while (sum > 9)
+                sum = (long)sum.ToString().Select(char.GetNumericValue).Sum();
+
+            return sum;
+        }
+
+        private static void Validate(string n, int k)
+        {
+            if (k < 1 || k > Math.Pow(10, 5))
+                throw new ArgumentException("The value of 'k' must be between 1 and 10^5", nameof(k));
+
+            if (n.Length < 1 || n.Length > Math.Pow(10, 100000))
+                throw new ArgumentException("The length of 'n' must be between 1 and 10^100000", nameof(n));
         }
     }
 
@@ -30,7 +64,7 @@
 
             int k = Convert.ToInt32(firstMultipleInput[1]);
 
-            int result = Result.superDigit(n, k);
+            long result = Result.superDigit(n, k);
 
             textWriter.WriteLine(result);
 
