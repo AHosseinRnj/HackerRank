@@ -17,6 +17,7 @@ namespace FormingAMagicSquare
         {
             Validate(s);
 
+            /*
             List<List<List<int>>> collection = new List<List<List<int>>>()
             {
                 new List<List<int>>() {new List<int>() {8, 1, 6}, new List<int>() {3, 5, 7}, new List<int>() {4, 9, 2}},
@@ -42,6 +43,75 @@ namespace FormingAMagicSquare
             }
 
             return min;
+            */
+
+            List<List<int>> matrix = new List<List<int>>()
+            {
+                new List<int>() { 8, 1, 6 },
+                new List<int>() { 3, 5, 7 },
+                new List<int>() { 4, 9, 2 }
+            };
+
+            List<int> change = new List<int>();
+            for (int i = 0; i < 4; i++)
+            {
+                change.Add(Changes(s, matrix));
+                var reflectedMatrix = ReflectMat(matrix);
+                change.Add(Changes(s, reflectedMatrix));
+                matrix = RotateBy90(matrix);
+            }
+
+            int minChange = change[0];
+            for (int i = 1; i < 8; i++)
+            {
+                minChange = Math.Min(minChange, change[i]);
+            }
+
+            return minChange;
+        }
+
+        static List<List<int>> RotateBy90(List<List<int>> mat)
+        {
+            int n = mat.Count;
+            List<List<int>> newMat = new List<List<int>>();
+            for (int i = 0; i < n; i++)
+            {
+                newMat.Add(new List<int>());
+                for (int j = 0; j < n; j++)
+                {
+                    newMat[i].Add(mat[n - j - 1][i]);
+                }
+            }
+            return newMat;
+        }
+
+        static List<List<int>> ReflectMat(List<List<int>> mat)
+        {
+            int n = mat.Count;
+            List<List<int>> newMat = new List<List<int>>();
+            for (int i = 0; i < n; i++)
+            {
+                newMat.Add(new List<int>());
+                for (int j = 0; j < n; j++)
+                {
+                    newMat[i].Add(mat[i][n - j - 1]);
+                }
+            }
+            return newMat;
+        }
+
+        static int Changes(List<List<int>> mat1, List<List<int>> mat2)
+        {
+            int n = mat1.Count;
+            int change = 0;
+            for (int i = 0; i < n; i++)
+            {
+                for (int j = 0; j < n; j++)
+                {
+                    change += Math.Abs(mat1[i][j] - mat2[i][j]);
+                }
+            }
+            return change;
         }
 
         private static void Validate(List<List<int>> s)
