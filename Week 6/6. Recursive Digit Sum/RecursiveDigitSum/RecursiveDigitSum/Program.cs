@@ -34,12 +34,31 @@
             return superNum;
             */
 
+            /*
             long sum = (long)n.Select(char.GetNumericValue).Sum() * k;
 
             while (sum > 9)
                 sum = (long)sum.ToString().Select(char.GetNumericValue).Sum();
-
+            
             return sum;
+            */
+
+            var initialNum = (long)n.Select(char.GetNumericValue).Sum() * k;
+            Console.WriteLine($"initialNum : {initialNum}");
+
+            var result = CalculateDigit(initialNum);
+
+            return result;
+        }
+
+        private static long CalculateDigit(long n)
+        {
+            if (n <= 9)
+                return n;
+
+            Console.WriteLine($"n : {n}");
+            var sum = (long)n.ToString().Select(char.GetNumericValue).Sum();
+            return CalculateDigit(sum);
         }
 
         private static void Validate(string n, int k)
