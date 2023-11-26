@@ -1,4 +1,6 @@
-﻿namespace SumVsXOR
+﻿using static System.Runtime.InteropServices.JavaScript.JSType;
+
+namespace SumVsXOR
 {
     class Result
     {
@@ -12,7 +14,45 @@
 
         public static long sumXor(long n)
         {
-            return 0;
+            Validate(n);
+
+            /* Time Limit :
+            var count = 0;
+            if (n == 0)
+                return ++count;
+
+            for (int i = 0; i < n; i++)
+            {
+                var sum = n + i;
+                var xor = n ^ i;
+
+                if (sum == xor)
+                    count++;
+            }
+
+            return count;
+            */
+
+            if (n == 0)
+                return 1;
+
+            var zeroBitCount = 0;
+            var binaryRepresentation = Convert.ToString(n, 2);
+
+            foreach (var bit in binaryRepresentation)
+            {
+                if (bit == '0')
+                    zeroBitCount++;
+            }
+
+            var result = (long)Math.Pow(2, zeroBitCount);
+            return result;
+        }
+
+        private static void Validate(long n)
+        {
+            if (n < 0 || n > Math.Pow(10, 15))
+                throw new ArgumentException("Input should be between 0 and 10^15", nameof(n));
         }
     }
 
@@ -30,6 +70,8 @@
 
             textWriter.Flush();
             textWriter.Close();
+
+            Console.ReadLine();
         }
     }
 }
