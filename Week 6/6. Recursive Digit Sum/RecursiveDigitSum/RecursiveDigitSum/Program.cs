@@ -44,8 +44,6 @@
             */
 
             var initialNum = (long)n.Select(char.GetNumericValue).Sum() * k;
-            Console.WriteLine($"initialNum : {initialNum}");
-
             var result = CalculateDigit(initialNum);
 
             return result;
@@ -56,7 +54,6 @@
             if (n <= 9)
                 return n;
 
-            Console.WriteLine($"n : {n}");
             var sum = (long)n.ToString().Select(char.GetNumericValue).Sum();
             return CalculateDigit(sum);
         }
