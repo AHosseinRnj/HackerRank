@@ -31,18 +31,20 @@
             return currentPlayer == 1 ? "Richard" : "Louise";
             */
 
-            var counter = 0;
-            var number = n - 1;
+            var number = n;
+            var currentPlayer = 1;
 
-            while (number > 0)
+            while (number > 1)
             {
-                if ((number & 1) == 1)
-                    counter++;
+                if ((number & number - 1) == 0)
+                    number = number / 2;
+                else
+                    number = number - NextPowerOfTwo(number);
 
-                number >>= 1;
+                currentPlayer = currentPlayer == 1 ? 2 : 1;
             }
 
-            return counter % 2 == 0 ? "Richard" : "Louise";
+            return currentPlayer == 1 ? "Richard" : "Louise";
         }
 
         private static bool IsPowerOfTwo(long n)
