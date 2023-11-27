@@ -12,7 +12,50 @@
 
         public static int palindromeIndex(string s)
         {
-            return 0;
+            Validate(s);
+
+            int left = 0;
+            int right = s.Length - 1;
+
+            while (left < right)
+            {
+                if (s[left] != s[right])
+                    break;
+
+                left++;
+                right--;
+            }
+
+            if (left >= right)
+                return -1;
+
+            var tempLeft = left;
+            var tempRight = right;
+
+            left++;
+            var leftFault = true;
+            while (left < right)
+            {
+                if (s[left] != s[right])
+                {
+                    leftFault = false;
+                    break;
+                }
+
+                left++;
+                right--;
+            }
+
+            return leftFault ? tempLeft : tempRight;
+        }
+
+        private static void Validate(string s)
+        {
+            if (s.Length < 1 || s.Length > Math.Pow(10, 5) + 5)
+                throw new ArgumentException("Input length should be between 1 and 10^5 + 5", nameof(s));
+
+            if (s.Any(chr => !char.IsLower(chr)))
+                throw new ArgumentException("Only lower case characters are valid", nameof(s));
         }
     }
 
@@ -35,6 +78,8 @@
 
             textWriter.Flush();
             textWriter.Close();
+
+            Console.ReadLine();
         }
     }
 }
