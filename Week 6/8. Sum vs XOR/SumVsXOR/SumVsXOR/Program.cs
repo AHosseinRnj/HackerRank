@@ -36,14 +36,8 @@ namespace SumVsXOR
             if (n == 0)
                 return 1;
 
-            var zeroBitCount = 0;
             var binaryRepresentation = Convert.ToString(n, 2);
-
-            foreach (var bit in binaryRepresentation)
-            {
-                if (bit == '0')
-                    zeroBitCount++;
-            }
+            var zeroBitCount = binaryRepresentation.Count(bit => bit == '0');
 
             var result = (long)Math.Pow(2, zeroBitCount);
             return result;
