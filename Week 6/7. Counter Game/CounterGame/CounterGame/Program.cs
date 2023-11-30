@@ -31,6 +31,7 @@
             return currentPlayer == 1 ? "Richard" : "Louise";
             */
 
+            /*
             var number = n;
             var currentPlayer = 1;
 
@@ -45,6 +46,23 @@
             }
 
             return currentPlayer == 1 ? "Richard" : "Louise";
+            */
+
+            // Recursive :
+            var result = CounterGameRecursive(n, 1);
+            return result == 1 ? "Richard" : "Louise";
+        }
+
+        public static int CounterGameRecursive(long number, int currentPlayer)
+        {
+            if (number == 1)
+                return currentPlayer;
+
+            var nextPlayer = currentPlayer == 1 ? 2 : 1;
+            if ((number & number - 1) == 0)
+                return CounterGameRecursive(number / 2, nextPlayer);
+            else
+                return CounterGameRecursive(number - NextPowerOfTwo(number), nextPlayer);
         }
 
         private static bool IsPowerOfTwo(long n)
