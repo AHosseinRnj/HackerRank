@@ -14,7 +14,51 @@
 
         public static int pylons(int k, List<int> arr)
         {
-            return 0;
+            Validate(k, arr);
+
+            var index = 0;
+            var numOfPlants = 0;
+            var length = arr.Count;
+
+            while (index < length)
+            {
+                var isFound = false;
+                var start = index + k - 1;
+                var end = index - k + 1;
+
+                for (int j = start; j >= end; j--)
+                {
+                    if (IsValidIndex(j, length) && arr[j] == 1)
+                    {
+                        numOfPlants++;
+                        index = j + k;
+                        isFound = true;
+                        break;
+                    }
+                }
+
+                if (!isFound)
+                    return -1;
+            }
+
+            return numOfPlants;
+        }
+
+        private static bool IsValidIndex(int index, int length)
+        {
+            return (index >= 0 && index < length);
+        }
+
+        private static void Validate(int k, List<int> arr)
+        {
+            if (k < 1 || k > Math.Pow(10, 5))
+                throw new ArgumentException("Distributed Range must be between 1 and 10^5", nameof(k));
+
+            if (arr.Count < 1 || arr.Count > Math.Pow(10, 5))
+                throw new ArgumentException("Array Length must be between 1 and 10^5", nameof(arr.Count));
+
+            if (arr.Any(val => val < 0 && val > 1))
+                throw new ArgumentException("Each array elements must be 0 or 1", nameof(arr));
         }
     }
 
