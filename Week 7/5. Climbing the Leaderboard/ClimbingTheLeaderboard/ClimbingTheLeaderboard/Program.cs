@@ -16,6 +16,23 @@
         {
             return new List<int>();
         }
+
+        private static void Validate(List<int> ranked, List<int> player)
+        {
+            var n = ranked.Count;
+            if (n < 1 || n > Math.Pow(2, 10 ^ 5))
+                throw new ArgumentException("", nameof(n));
+
+            var m = player.Count;
+            if (m < 1 || m > Math.Pow(2, 10 ^ 5))
+                throw new ArgumentException("", nameof(m));
+
+            if (ranked.Any(val => val < 0 || val > Math.Pow(10, 9)))
+                throw new ArgumentException("", nameof(ranked));
+
+            if (player.Any(val => val < 0 || val > Math.Pow(10, 9)))
+                throw new ArgumentException("", nameof(player));
+        }
     }
 
     public class Program
@@ -34,7 +51,7 @@
 
             List<int> result = Result.climbingLeaderboard(ranked, player);
 
-            textWriter.WriteLine(String.Join("\n", result));
+            Console.WriteLine(String.Join("\n", result));
 
             textWriter.Flush();
             textWriter.Close();
