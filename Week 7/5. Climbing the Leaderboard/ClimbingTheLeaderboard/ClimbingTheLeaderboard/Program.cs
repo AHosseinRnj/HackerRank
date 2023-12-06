@@ -21,17 +21,17 @@
         {
             var n = ranked.Count;
             if (n < 1 || n > Math.Pow(2, 10 ^ 5))
-                throw new ArgumentException("", nameof(n));
+                throw new ArgumentException("Number of players on the leaderboard must be between 2 and 10^5", nameof(n));
 
             var m = player.Count;
             if (m < 1 || m > Math.Pow(2, 10 ^ 5))
-                throw new ArgumentException("", nameof(m));
+                throw new ArgumentException("Number of games the player plays must be between 2 and 10^5", nameof(m));
 
             if (ranked.Any(val => val < 0 || val > Math.Pow(10, 9)))
-                throw new ArgumentException("", nameof(ranked));
+                throw new ArgumentException("Leaderboard scores must be between 0 and 10^9", nameof(ranked));
 
             if (player.Any(val => val < 0 || val > Math.Pow(10, 9)))
-                throw new ArgumentException("", nameof(player));
+                throw new ArgumentException("Game scores must be between 0 and 10^9", nameof(player));
         }
     }
 
