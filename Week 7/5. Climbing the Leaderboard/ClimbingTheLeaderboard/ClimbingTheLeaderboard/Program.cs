@@ -14,7 +14,21 @@
 
         public static List<int> climbingLeaderboard(List<int> ranked, List<int> player)
         {
-            return new List<int>();
+            //Validate(ranked, player);
+
+            var result = new List<int>();
+            ranked = ranked.Distinct().ToList();
+            int n = ranked.Count;
+
+            foreach (var score in player)
+            {
+                while (n > 0 && score >= ranked[n - 1])
+                    n--;
+
+                result.Add(n + 1);
+            }
+
+            return result;
         }
 
         private static void Validate(List<int> ranked, List<int> player)
