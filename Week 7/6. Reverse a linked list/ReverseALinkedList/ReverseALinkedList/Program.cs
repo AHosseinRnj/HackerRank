@@ -61,7 +61,21 @@ class Solution
     {
         public static SinglyLinkedListNode reverse(SinglyLinkedListNode llist)
         {
-            return new SinglyLinkedListNode(0);
+            // C# Is broken on website:
+            
+            SinglyLinkedListNode currentNode = llist,
+                                 previousNode = null,
+                                 nextNode = null;
+
+            while (currentNode != null)
+            {
+                nextNode = currentNode.next;
+                currentNode.next = previousNode;
+                previousNode = currentNode;
+                currentNode = nextNode;
+            }
+
+            return previousNode;
         }
     }
 
