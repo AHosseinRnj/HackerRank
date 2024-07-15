@@ -62,7 +62,22 @@
     {
         public static DoublyLinkedListNode reverse(DoublyLinkedListNode llist)
         {
-            return new DoublyLinkedListNode(0);
+            // C# Is broken on website:
+
+            DoublyLinkedListNode currentNode = llist,
+                     previousNode = null,
+                     nextNode = null;
+
+            while (currentNode != null)
+            {
+                nextNode = currentNode.next;
+                currentNode.prev = nextNode;
+                currentNode.next = previousNode;
+                previousNode = currentNode;
+                currentNode = nextNode;
+            }
+
+            return previousNode;
         }
     }
 
